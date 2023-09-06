@@ -42,7 +42,7 @@ function Movie() {
   return (
     <Container maxWidth="xl">
       <Typography variant="h5" sx={{ my: 4 }} align="center">
-        {movie}
+        Movie Name: {movie}
       </Typography>
       <Grid
         container
@@ -63,7 +63,7 @@ function Movie() {
           <Image
             src={imdb_url}
             width={300}
-            duration={0}
+            duration={300}
             style={{ borderRadius: "10px" }}
           />
         </Grid>
@@ -126,16 +126,14 @@ function Movie() {
                 background: "none",
               }}
               disabled={!isEditModeActive}
-              // fullWidth
               // sx={{ wordWrap: "break-word", height: "300px" }}
-              // onChange={handleTextChange}
             ></TextareaAutosize>
             {isEditModeActive ? (
               <LoadingButton
                 color="primary"
                 onClick={handleSave}
                 // loading={loading}
-                loadingPosition="start"
+                // loadingPosition="start"
                 startIcon={<SaveIcon />}
                 variant="contained"
                 sx={{

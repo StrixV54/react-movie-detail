@@ -20,10 +20,10 @@ export const postDetails = async (id: string, description: string) => {
         description,
       }),
     });
-    const result = await res.json();
+    // const result = await res.json();
     if (res.ok) {
       console.log(`Success :: updated movie with id: ${id}`);
-      console.log("New Movie Data : ", result.newData);
+      // console.log("New Movie Data : ", result.newData);
     }
   } catch (error) {
     console.log("Something went wrong", error);

@@ -36,10 +36,7 @@ export default function Navbar() {
   };
 
   return (
-    <AppBar
-      position="static"
-      sx={{ backgroundColor: "#444444", paddingY: "4px" }}
-    >
+    <AppBar position="static" sx={{ paddingY: "4px" }} color="primary">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <MovieIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />

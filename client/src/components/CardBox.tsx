@@ -25,7 +25,13 @@ function CardBox(props: propsType) {
       }}
       key={id}
     >
-      <CardMedia sx={{ height: 200 }} image={imdb_url} title="green iguana" />
+      <CardMedia
+        sx={{ height: 200 }}
+        image={imdb_url}
+        title="green iguana"
+        component="img"
+        loading="lazy"
+      />
       <CardContent sx={{ flexGrow: 1 }}>
         <Typography gutterBottom variant="h6" component="div">
           {movie}

@@ -1,9 +1,8 @@
 // import React from 'react'
 
 import { Box, Container, Grid, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useLoaderData } from "react-router-dom";
 import CardBox from "../components/CardBox";
-import { getMoviesList } from "../api/api.tsx";
 
 interface propsType {
   movie: string;
@@ -14,15 +13,16 @@ interface propsType {
 }
 
 function MovieList() {
-  const [movieDetails, setMovieDetails] = useState([]);
+  const movieDetails: [] = useLoaderData() as [];
+  // const [movieDetails, setMovieDetails] = useState(user);
 
-  useEffect(() => {
-    const getMovies = async () => {
-      const result = await getMoviesList();
-      setMovieDetails(result);
-    };
-    getMovies();
-  }, []);
+  // useEffect(() => {
+  //   const getMovies = async () => {
+  //     const result = await getMoviesList();
+  //     setMovieDetails(result);
+  //   };
+  //   getMovies();
+  // }, []);
 
   return (
     <Container maxWidth="xl">
@@ -36,10 +36,10 @@ function MovieList() {
       >
         <Grid
           container
-          spacing={2}
+          spacing={3}
           pb={6}
           sx={{
-            paddingX: { xl: 10, md: 4, xs: 4 },
+            paddingX: { xl: 8, md: 4, xs: 4 },
             alignItems: { md: "normal", xs: "center" },
             justifyContent: { md: "normal", xs: "center" },
           }}
