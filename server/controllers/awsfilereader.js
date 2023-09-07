@@ -22,8 +22,6 @@ export const writeValue = (newValue) => {
   s3.putObject(params, (err, data) => {
     if (err) {
       console.error("Error uploading JSON to S3:", err);
-    } else {
-      console.log("JSON object uploaded successfully:", data);
     }
   });
 };

@@ -5,7 +5,6 @@ export const getMovies = async (req, res) => {
     const movies = await readValue();
     res.status(200).json(JSON.parse(movies));
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -35,7 +34,6 @@ export const putDescription = async (req, res) => {
     else
       res.status(404).json({ message: `Id: "${id}" not found in database.` });
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: error.message });
   }
 };
