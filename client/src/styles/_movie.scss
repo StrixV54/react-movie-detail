@@ -1,0 +1,7 @@
+.movie-image-detail {
+  max-width: 300px !important;
+
+  @media screen and (max-width: 400px) {
+    max-width: 200px !important;
+  }
+}

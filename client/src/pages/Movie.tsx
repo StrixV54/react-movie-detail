@@ -45,8 +45,8 @@ function Movie() {
 
   return (
     <Container maxWidth="xl">
-      <Typography variant="h5" sx={{ my: 4 }} align="center">
-        Movie Name: {movie}
+      <Typography variant="h5" sx={{ my: { md: 4, xs: 3 } }} align="center">
+        {movie}
       </Typography>
       <Grid
         container
@@ -66,7 +66,7 @@ function Movie() {
         >
           <Image
             src={imdb_url}
-            width={300}
+            className="movie-image-detail"
             duration={300}
             style={{ borderRadius: "10px" }}
           />
@@ -78,21 +78,23 @@ function Movie() {
           sm={7}
           xs={12}
           p={0}
+          paddingX={{ md: 3, xs: 0 }}
           marginTop={{ xs: 3, md: 0 }}
+          marginBottom={{ xs: 6, md: 0 }}
         >
           <Box
             sx={{
-              height: "100%",
-              width: "100%",
+              height: "100% !important",
+              width: "100% !important",
               display: "flex",
               flexDirection: "column",
               padding: 0,
             }}
           >
-            <Typography variant="h6" pb={3}>
+            <Typography variant="h6" pb={{ md: 3, xs: 1 }}>
               Rating : {rating}
             </Typography>
-            <Typography variant="h6" pb={3}>
+            <Typography variant="h6" pb={{ md: 3, xs: 1 }}>
               Category : {makeFirstLetterCapital(category)}
             </Typography>
             <Typography
@@ -107,11 +109,14 @@ function Movie() {
                   sx={{
                     border: "solid 1px #d0d0d0",
                     padding: "2px",
-                    margin: "0px 5px",
+                    margin: "0px 8px",
                   }}
                   onClick={() => setIsEditModeActive((prev) => !prev)}
                 >
-                  <EditIcon sx={{ height: "15px", width: "15px" }} />
+                  <EditIcon
+                    color="primary"
+                    sx={{ height: "15px", width: "15px" }}
+                  />
                 </IconButton>
               </Tooltip>
             </Typography>
@@ -123,7 +128,7 @@ function Movie() {
               // onChange={handleTextChange}
               style={{
                 resize: "none",
-                fontSize: "1rem",
+                fontSize: "1.05rem",
                 marginTop: "12px",
                 textDecoration: "none",
                 border: isEditModeActive ? "solid 1px #636363" : "none",
@@ -143,7 +148,7 @@ function Movie() {
                 sx={{
                   fontSize: "11px",
                   width: "fit-content",
-                  marginTop: "10px",
+                  marginTop: "30px",
                 }}
               >
                 <span>Save</span>
