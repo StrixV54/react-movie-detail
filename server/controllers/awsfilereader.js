@@ -16,7 +16,7 @@ export const writeValue = (newValue) => {
     Bucket: bucketName,
     Key: fileName,
     Body: jsonContent,
-    ContentType: "application/json", // Specify the content type
+    ContentType: "application/json", 
   };
 
   s3.putObject(params, (err, data) => {
