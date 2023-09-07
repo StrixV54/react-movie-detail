@@ -25,8 +25,8 @@ function Movie() {
   const { movie, description, rating, imdb_url, category } = data;
   const { id } = useParams();
   const textAreaValueRef = useRef<HTMLTextAreaElement | null>(null);
-  const [isEditModeActive, setIsEditModeActive] = useState(false);
-  const [prevValue, setPrevValue] = useState(description);
+  const [isEditModeActive, setIsEditModeActive] = useState<boolean>(false);
+  const [prevValue, setPrevValue] = useState<string>(description);
 
   const makeFirstLetterCapital = (input: string) => {
     return input.charAt(0).toUpperCase() + input.slice(1);
