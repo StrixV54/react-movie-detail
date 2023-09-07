@@ -1,6 +1,4 @@
 import AWS from "aws-sdk";
-import fs from "fs";
-
 // const fileName = "sampledata.json";
 
 const s3 = new AWS.S3({
