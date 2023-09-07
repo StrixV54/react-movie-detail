@@ -4,7 +4,7 @@ import { useRouteError } from "react-router-dom";
 function ErrorPage() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const error: any = useRouteError();
-  console.log(error);
+  // console.log("Error", error);
   return (
     <Container
       maxWidth="xl"
@@ -23,7 +23,15 @@ function ErrorPage() {
       <Typography variant="h5" pt={2} pb={4}>
         {error.statusText}
       </Typography>
-      <Typography variant="h6">Something Went Wrong : {error.data}</Typography>
+      {error?.data ? (
+        <Typography variant="h6">
+          Something Went Wrong : {error.data}
+        </Typography>
+      ) : (
+        <Typography variant="body2">
+          Something Went Wrong : {error.stack}
+        </Typography>
+      )}
     </Container>
   );
 }

@@ -27,6 +27,10 @@ function Movie() {
   const textAreaValueRef = useRef<HTMLTextAreaElement | null>(null);
   const [isEditModeActive, setIsEditModeActive] = useState(false);
 
+  const makeFirstLetterCapital = (input: string) => {
+    return input.charAt(0).toUpperCase() + input.slice(1);
+  };
+
   const handleSave = async () => {
     try {
       const postDescription = async () => {
@@ -89,7 +93,7 @@ function Movie() {
               Rating : {rating}
             </Typography>
             <Typography variant="h6" pb={3}>
-              Category : {category}
+              Category : {makeFirstLetterCapital(category)}
             </Typography>
             <Typography
               variant="h6"
