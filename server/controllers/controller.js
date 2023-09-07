@@ -1,10 +1,8 @@
-import { json } from "express";
-import { readValue, writeValue } from "./datareader.js";
+import { readValue, writeValue } from "./awsfilereader.js";
 
 export const getMovies = async (req, res) => {
   try {
     const movies = await readValue();
-    // console.log(typeof movies);
     res.status(200).json(JSON.parse(movies));
   } catch (error) {
     console.log(error);
