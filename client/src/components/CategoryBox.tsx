@@ -22,7 +22,7 @@ function CategoryBox({ genre, movieDetails }: propsTypeCategory) {
       spacing={3}
       pb={6}
       sx={{
-        paddingX: { xl: 8, md: 4, xs: 4 },
+        paddingX: { xl: 8, md: 4, xs: 2 },
         alignItems: { md: "normal", xs: "center" },
         justifyContent: { md: "normal", xs: "center" },
       }}
@@ -31,7 +31,7 @@ function CategoryBox({ genre, movieDetails }: propsTypeCategory) {
         <Typography
           color="primary"
           sx={{
-            my: 2,
+            my: { md: 2, xs: 0 },
             fontSize: "1.3rem",
             fontWeight: "800",
             textAlign: { xs: "center", md: "left" },
