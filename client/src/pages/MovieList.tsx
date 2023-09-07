@@ -40,14 +40,23 @@ function MovieList() {
           pb={6}
           sx={{
             paddingX: { xl: 8, md: 4, xs: 2 },
-            alignItems: { md: "normal", xs: "center" },
-            justifyContent: { md: "normal", xs: "center" },
+            alignItems: { md: "normal", sm: "center" },
+            justifyContent: { md: "normal", sm: "center" },
           }}
         >
           {movieDetails &&
             movieDetails.map((data: propsType, id) => {
               return (
-                <Grid md={3} sm={6} xs={12} item key={id}>
+                <Grid
+                  md={3}
+                  sm={6}
+                  xs={12}
+                  item
+                  key={id}
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                >
                   <CardBox {...data} />
                 </Grid>
               );
