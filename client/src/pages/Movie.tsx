@@ -84,8 +84,8 @@ function Movie() {
         >
           <Box
             sx={{
-              height: "100% !important",
-              width: "100% !important",
+              height: "100%",
+              width: "100%",
               display: "flex",
               flexDirection: "column",
               padding: 0,
