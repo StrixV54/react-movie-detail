@@ -26,21 +26,28 @@ function Movie() {
   const { id } = useParams();
   const textAreaValueRef = useRef<HTMLTextAreaElement | null>(null);
   const [isEditModeActive, setIsEditModeActive] = useState(false);
+  const [prevValue, setPrevValue] = useState(description);
 
   const makeFirstLetterCapital = (input: string) => {
     return input.charAt(0).toUpperCase() + input.slice(1);
   };
 
   const handleSave = async () => {
+    const newValue: string = textAreaValueRef.current!.value;
     try {
+      if (prevValue === newValue) {
+        console.log("You are trying to save same value.");
+        return;
+      }
       const postDescription = async () => {
-        await postDetails(id as string, textAreaValueRef.current!.value);
+        await postDetails(id as string, newValue);
       };
       postDescription();
     } catch (error) {
       console.log("Something went wrong", error);
     }
     setIsEditModeActive(false);
+    setPrevValue(newValue);
   };
 
   return (
