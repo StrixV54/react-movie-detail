@@ -1,5 +1,4 @@
 import AWS from "aws-sdk";
-// const fileName = "sampledata.json";
 
 const s3 = new AWS.S3({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -8,7 +7,6 @@ const s3 = new AWS.S3({
 
 const bucketName = "reactmovieproject";
 const fileName = "sampledata.json";
-// const fileData = fs.readFileSync(fileName);
 
 export const writeValue = (newValue) => {
   const jsonNewValue = { movies: newValue };

@@ -122,10 +122,8 @@ function Movie() {
             </Typography>
             <TextareaAutosize
               defaultValue={description}
-              // maxRows={5}
               minRows={3}
               ref={textAreaValueRef}
-              // onChange={handleTextChange}
               style={{
                 resize: "none",
                 fontSize: "1.05rem",
