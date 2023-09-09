@@ -52,8 +52,12 @@ function Movie() {
 
   return (
     <Container maxWidth="xl">
-      <Typography variant="h5" sx={{ my: { md: 4, xs: 3 } }} align="center">
-        {movie}
+      <Typography
+        variant="h5"
+        sx={{ my: { md: 4, xs: 3 }, fontWeight: 800 }}
+        align="center"
+      >
+        {id} : {movie}
       </Typography>
       <Grid
         container
@@ -82,7 +86,7 @@ function Movie() {
           item
           alignItems="center"
           md={7}
-          sm={7}
+          sm={12}
           xs={12}
           p={0}
           paddingX={{ md: 3, xs: 0 }}
@@ -99,10 +103,10 @@ function Movie() {
             }}
           >
             <Typography variant="h6" pb={{ md: 3, xs: 1 }}>
-              Rating : {rating}
+              <strong>Rating</strong> : {rating}
             </Typography>
             <Typography variant="h6" pb={{ md: 3, xs: 1 }}>
-              Category : {makeFirstLetterCapital(category)}
+              <strong>Category</strong> : {makeFirstLetterCapital(category)}
             </Typography>
             <Typography
               variant="h6"
@@ -110,7 +114,7 @@ function Movie() {
               alignItems="center"
               justifyContent="center"
             >
-              Description
+              <strong>Description</strong>
               <Tooltip title="Edit">
                 <IconButton
                   sx={{
@@ -133,8 +137,9 @@ function Movie() {
               minRows={3}
               ref={textAreaValueRef}
               style={{
+                fontFamily: "sans-serif",
                 resize: "none",
-                fontSize: "1.05rem",
+                fontSize: "1.2rem",
                 marginTop: "12px",
                 textDecoration: "none",
                 border: isEditModeActive ? "solid 1px #636363" : "none",

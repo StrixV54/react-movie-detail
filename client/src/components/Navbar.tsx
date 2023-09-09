@@ -131,7 +131,10 @@ export default function Navbar() {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0, display: "flex", alignItems: "center" }}>
+            <Typography pt="3px" sx={{ display: { sm: "block", xs: "none" } }}>
+              Shrikant
+            </Typography>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -157,7 +160,15 @@ export default function Navbar() {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
+              <MenuItem onClick={handleClose}>
+                Profile
+                <Typography
+                  pt="3px"
+                  sx={{ display: { sm: "none", xs: "block" } }}
+                >
+                  &nbsp; - Shrikant
+                </Typography>
+              </MenuItem>
               <MenuItem onClick={handleClose}>My account</MenuItem>
             </Menu>
           </Box>

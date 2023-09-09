@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import routes from "./routes/route.js";
+import { MongoClient } from "mongodb";
 
 dotenv.config();
 const app = express();
@@ -28,3 +29,18 @@ app.use("/api/", routes);
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+export const client = new MongoClient(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+export const collection = client.db("MovieDB").collection("movies");
+
+async function connectToMongoDB() {
+  try {
+    await client.connect();
+  } catch (error) {
+    console.log(error);
+  }
+}
+connectToMongoDB();
