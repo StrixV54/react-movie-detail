@@ -162,10 +162,7 @@ export default function Navbar() {
             >
               <MenuItem onClick={handleClose}>
                 Profile
-                <Typography
-                  pt="3px"
-                  sx={{ display: { sm: "none", xs: "block" } }}
-                >
+                <Typography sx={{ display: { sm: "none", xs: "block" } }}>
                   &nbsp; - Shrikant
                 </Typography>
               </MenuItem>
