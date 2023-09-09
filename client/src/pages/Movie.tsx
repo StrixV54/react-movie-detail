@@ -18,10 +18,7 @@ import Image from "mui-image";
 import { postDetails } from "../api/api.tsx";
 
 function Movie() {
-  const {
-    state: { data },
-  } = useLocation();
-
+  const { state: { data } } = useLocation();
   const { movie, description, rating, imdb_url, category } = data;
   const { id } = useParams();
   const textAreaValueRef = useRef<HTMLTextAreaElement | null>(null);

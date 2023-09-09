@@ -12,7 +12,7 @@ export const getMovies = async (req, res) => {
 export const putDescription = async (req, res) => {
   try {
     const { id, description } = req.body;
-    const movies = await readValue();
+    // const movies = await readValue();
     // const jsonMovies = JSON.parse(movies).movies;
     // let isSame = false;
     // const newData = jsonMovies.movies.map((item) => {
@@ -40,9 +40,7 @@ export const putDescription = async (req, res) => {
     //Depricating above code , using MongoDB now
     const result = await writeValue(id, description);
     console.log(result);
-    res
-      .status(200)
-      .json({ message: "Successfully Updated", db_response: result });
+    res.status(200).json({ message: "Successfully Updated", db_response: result });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
