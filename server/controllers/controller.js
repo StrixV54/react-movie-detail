@@ -26,8 +26,9 @@ export const putDescription = async (req, res) => {
       }
       return item;
     });
-    writeValue(newData);
-    if (res.statusCode === 200) res.json({ message: "Success", newData });
+    if (res.statusCode === 200) {
+      writeValue(newData);
+      res.json({ message: "Success", newData });}
     else
       res.status(404).json({ message: `Id: "${id}" not found in database.` });
   } catch (error) {
