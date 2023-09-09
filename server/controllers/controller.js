@@ -13,24 +13,21 @@ export const putDescription = async (req, res) => {
   try {
     const { id, description } = req.body;
     const movies = await readValue();
-    let foundFlag = false;
-    let isSame = false;
     const jsonMovies = JSON.parse(movies);
     const newData = jsonMovies.movies.map((item) => {
       if (item.id.toString() === id.toString()) {
+        res.status(200);
         if (item.description === description) {
-          isSame = true;
+          res.json({ message: "Value to be updated is same as before, hence not updating it." });
+          return;
         } else {
           item.description = description;
-          foundFlag = true;
         }
       }
       return item;
     });
     writeValue(newData);
-    if (foundFlag) res.status(200).json({ message: "Success", newData });
-    else if (isSame)
-      res.status(200).json({ message: "Updated value is same as before" });
+    if (res.statusCode === 200) res.json({ message: "Success", newData });
     else
       res.status(404).json({ message: `Id: "${id}" not found in database.` });
   } catch (error) {
