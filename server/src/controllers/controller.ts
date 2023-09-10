@@ -1,15 +1,17 @@
-import { readValue, writeValue } from "./mongoreader.js";
+import { readValue, writeValue } from "./mongoreader";
+import { Request, Response } from "express";
 
-export const getMovies = async (req, res) => {
+export const getMovies = async (req: Request, res: Response): Promise<void> => {
   try {
     const movies = await readValue();
     res.status(200).json({ movies });
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
 };
 
-export const putDescription = async (req, res) => {
+export const putDescription = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id, description } = req.body;
     // const movies = await readValue();
@@ -40,8 +42,11 @@ export const putDescription = async (req, res) => {
     //Depricating above code , using MongoDB now
     const result = await writeValue(id, description);
     console.log(result);
-    res.status(200).json({ message: "Successfully Updated", db_response: result });
-  } catch (error) {
+    res
+      .status(200)
+      .json({ message: "Successfully Updated", db_response: result });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
 };
