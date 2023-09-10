@@ -43,9 +43,9 @@ function CardBox(props: propsType) {
       <CardActions>
         <Link
           to={"/movie/" + id + "?name=" + movie}
-          state={{
-            data: props,
-          }}
+          // state={{
+          //   data: props,
+          // }}
           className="link-to-movie"
         >
           Details

@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useRef, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import LoadingButton from "@mui/lab/LoadingButton";
 import SaveIcon from "@mui/icons-material/Save";
@@ -17,10 +17,23 @@ import TextareaAutosize from "@mui/material/TextareaAutosize";
 import Image from "mui-image";
 import { postDetails } from "../api/api.tsx";
 
+interface propsType {
+  movie: string;
+  description: string;
+  id: string;
+  imdb_url: string;
+  rating: string;
+  category: string;
+}
+
+
 function Movie() {
-  const { state: { data } } = useLocation();
-  const { movie, description, rating, imdb_url, category } = data;
+  // const { state: { data } } = useLocation();
+  // const { movie, description, rating, imdb_url, category } = data;
   const { id } = useParams();
+  const movieDetails: [] = useLoaderData() as [];
+  const currentMovieDetail : propsType = movieDetails.filter((item : {id : number}) => String(item.id) == id)[0];
+  const { movie, description, rating, imdb_url, category } = currentMovieDetail;
   const textAreaValueRef = useRef<HTMLTextAreaElement | null>(null);
   const [isEditModeActive, setIsEditModeActive] = useState<boolean>(false);
   const [prevValue, setPrevValue] = useState<string>(description);
@@ -33,7 +46,7 @@ function Movie() {
     const newValue: string = textAreaValueRef.current!.value;
     try {
       if (prevValue === newValue) {
-        console.log("You are trying to save same value.");
+        alert("You are trying to save same value.");
         return;
       }
       const postDescription = async () => {
