@@ -1,6 +1,6 @@
 # REACT - MOVIE
 
-This Project is created to showcase use of both frontend and Backend focusing on tech stack like React, NodeJS, Typescript and Material-UI. It provides Top 10 IMDB Movies list and categories of movies. 
+This Project is created to showcase skills focusing on tech stack like React, NodeJS, Typescript and Material-UI. It provides Top 10 IMDB Movies list and categories of movies. 
 
 To check the Live version of project, follow this link. - [LINK](https://movie-react-shrikant.netlify.app/)
 
@@ -16,7 +16,7 @@ To Configure and Run Project on your Local, follow mentioned steps.
 - Start both server and client using `npm run dev` in both terminals separately.
 - Open the app in your web browser (usually at http://localhost:5178).
 
-# Contribution
+## Contribution
 Feel free to report Issue or send Pull Request.
 
 To contribute into the Project:
