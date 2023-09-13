@@ -4,7 +4,6 @@ import {
   CardContent,
   CardMedia,
   Typography,
-  useTheme,
 } from "@mui/material";
 import Card from "@mui/material/Card";
 import { Link } from "react-router-dom";
@@ -18,8 +17,6 @@ interface propsType {
 }
 
 function CardBox(props: propsType) {
-  const theme = useTheme();
-  const isDarkMode: boolean = theme.palette.mode === "dark" ? true : false;
   const { movie, description, id, imdb_url } = props;
 
   return (

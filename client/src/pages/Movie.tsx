@@ -7,7 +7,6 @@ import {
   IconButton,
   Tooltip,
   Typography,
-  useTheme,
 } from "@mui/material";
 import { useRef, useState } from "react";
 import { useLoaderData, useParams } from "react-router-dom";
@@ -39,9 +38,6 @@ function Movie() {
   const textAreaValueRef = useRef<HTMLTextAreaElement | null>(null);
   const [isEditModeActive, setIsEditModeActive] = useState<boolean>(false);
   const [prevValue, setPrevValue] = useState<string>(description);
-
-  const theme = useTheme();
-  const isDarkMode: boolean = theme.palette.mode === "dark" ? true : false;
 
   const makeFirstLetterCapital = (input: string) => {
     return input.charAt(0).toUpperCase() + input.slice(1);

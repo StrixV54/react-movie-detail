@@ -50,8 +50,8 @@ const getDesignTokens = (mode: PaletteMode) => ({
   },
 });
 
-const localModeCache = localStorage.getItem("react-movie-darkmodecache");
-const modeInit: PaletteMode = localModeCache === "dark" ? "dark" : "light";
+const localStoreCache = localStorage.getItem("react-movie-darkmodecache");
+const modeInit: PaletteMode = localStoreCache === "dark" ? "dark" : "light";
 export const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 const ThemeModeProvider = ({ children }: { children: ReactNode }) => {

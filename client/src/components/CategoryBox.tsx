@@ -1,4 +1,4 @@
-import { Grid, Typography, useTheme } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import CardBox from "./CardBox";
 
 interface propsTypeCategory {
