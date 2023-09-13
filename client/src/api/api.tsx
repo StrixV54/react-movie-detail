@@ -2,12 +2,8 @@ const url = import.meta.env.VITE_BASEPATH || "http://localhost:5000/";
 
 export const getMoviesList = async (): Promise<[] | undefined> => {
   try {
-    const localStorageCache: string | null = localStorage.getItem(
-      "react-movie-movielist"
-    );
-    const isUpdated: string | null = localStorage.getItem(
-      "react-movie-isupdated"
-    );
+    const localStorageCache: string | null = localStorage.getItem("react-movie-movielist");
+    const isUpdated: string | null = localStorage.getItem("react-movie-isupdated");
 
     let result = null;
     if (localStorageCache && isUpdated === null) {

@@ -44,7 +44,7 @@ export default function Navbar() {
   return (
     <AppBar
       position="static"
-      sx={{ paddingY: "4px", backgroundColor: isDarkMode ? "#285395" : "" }}
+      sx={{ paddingY: "4px", bgcolor: "background.appbar" }}
       color="primary"
     >
       <Container maxWidth="xl">

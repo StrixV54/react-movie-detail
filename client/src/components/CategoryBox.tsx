@@ -16,9 +16,6 @@ interface propsTypeCard {
 }
 
 function CategoryBox({ genre, movieDetails }: propsTypeCategory) {
-  const theme = useTheme();
-  const isDarkMode: boolean = theme.palette.mode === "dark" ? true : false;
-
   return (
     <Grid
       container
@@ -32,14 +29,12 @@ function CategoryBox({ genre, movieDetails }: propsTypeCategory) {
     >
       <Grid item key="genre" md={12} xs={12}>
         <Typography
-          color="primary"
-          variant="body2"
+          color="text.heading"
           sx={{
             my: { md: 2, xs: 0 },
             fontSize: "1.3rem",
             fontWeight: "800",
             textAlign: { xs: "center", md: "left" },
-            color: isDarkMode ? "#59b8de" : "#13679f",
           }}
         >
           {genre.toUpperCase()}

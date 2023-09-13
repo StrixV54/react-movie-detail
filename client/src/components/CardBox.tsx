@@ -49,18 +49,20 @@ function CardBox(props: propsType) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Link
-          to={"/movie/" + id + "?name=" + movie}
-          // state={{
-          //   data: props,
-          // }}
-          className="link-to-movie"
-          style={{
-            color: isDarkMode ? "#59b8de" : "#13679f",
-          }}
-        >
-          Details
-        </Link>
+        <Typography color="text.link">
+          <Link
+            to={"/movie/" + id + "?name=" + movie}
+            // state={{
+            //   data: props,
+            // }}
+            className="link-to-movie"
+            style={{
+              color: "inherit",
+            }}
+          >
+            Details
+          </Link>
+        </Typography>
       </CardActions>
     </Card>
   );

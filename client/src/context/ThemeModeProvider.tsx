@@ -1,7 +1,18 @@
 import { ThemeProvider } from "@emotion/react";
 import { CssBaseline, PaletteMode, createTheme } from "@mui/material";
-import { grey } from "@mui/material/colors";
 import { ReactNode, createContext, useEffect, useMemo, useState } from "react";
+
+declare module "@mui/material/styles" {
+  interface TypeBackground {
+    appbar?: string;
+  }
+
+  interface TypeText {
+    heading?: string;
+    link?: string;
+    textarea?: string;
+  }
+}
 
 const getDesignTokens = (mode: PaletteMode) => ({
   palette: {
@@ -11,9 +22,14 @@ const getDesignTokens = (mode: PaletteMode) => ({
           primary: {
             main: "#285395",
           },
+          background: {
+            appbar: "#285395",
+            default: "#ececec",
+          },
           text: {
-            primary: grey[900],
-            secondary: grey[800],
+            heading: "#13679f",
+            link: "#13679f",
+            textarea: "#525252",
           },
         }
       : {
@@ -21,23 +37,24 @@ const getDesignTokens = (mode: PaletteMode) => ({
             main: "#285395",
           },
           background: {
-            default: grey[900],
-            paper: grey[800],
+            appbar: "#285395",
+            default: "#2c2c2c",
+            paper: "#3d3d3d",
           },
           text: {
-            primary: grey[50],
-            secondary: grey[200],
+            heading: "#59b8de",
+            link: "#59b8de",
+            textarea: "#c7c7c7",
           },
         }),
   },
 });
 
 const localModeCache = localStorage.getItem("react-movie-darkmodecache");
-
+const modeInit: PaletteMode = localModeCache === "dark" ? "dark" : "light";
 export const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 const ThemeModeProvider = ({ children }: { children: ReactNode }) => {
-  const modeInit: PaletteMode = localModeCache === "dark" ? "dark" : "light";
   const [mode, setMode] = useState<PaletteMode>(modeInit);
 
   useEffect(() => {

@@ -143,24 +143,28 @@ function Movie() {
                 </IconButton>
               </Tooltip>
             </Typography>
-            <TextareaAutosize
-              defaultValue={description}
-              // maxRows={5}
-              minRows={3}
-              ref={textAreaValueRef}
-              style={{
-                fontFamily: "sans-serif",
-                resize: "none",
-                fontSize: "1.2rem",
-                marginTop: "12px",
-                textDecoration: "none",
-                color: isDarkMode ? "#afafaf" : "#525252",
-                border: isEditModeActive ? "solid 1px #636363" : "none",
-                background: "none",
-              }}
-              disabled={!isEditModeActive}
-              // sx={{ wordWrap: "break-word", height: "300px" }}
-            ></TextareaAutosize>
+            <Typography color="text.textarea" width="100%">
+              <TextareaAutosize
+                defaultValue={description}
+                // maxRows={5}
+                minRows={3}
+                ref={textAreaValueRef}
+                style={{
+                  fontFamily: "sans-serif",
+                  resize: "none",
+                  fontSize: "1.2rem",
+                  marginTop: "12px",
+                  textDecoration: "none",
+                  width: "100%",
+                  color: "inherit",
+                  // color: isDarkMode ? "#afafaf" : "#525252",
+                  border: isEditModeActive ? "solid 1px #636363" : "none",
+                  background: "none",
+                }}
+                disabled={!isEditModeActive}
+                // sx={{ wordWrap: "break-word", height: "300px" }}
+              ></TextareaAutosize>
+            </Typography>
             {isEditModeActive ? (
               <LoadingButton
                 color="primary"
