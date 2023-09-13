@@ -1,6 +1,6 @@
 # REACT - MOVIE
 
-This Project is created to showcase skills focusing on Tech stack like React, NodeJS, Typescript and Material-UI. It provides Top 10 IMDB Movies list and categories of movies. 
+This Project provides Top 10 IMDB Movies list and categories of movies. It is created using Tech stacks :- React, NodeJs, Typescript, Material-UI, etc.
 
 To check the Live version of project, follow this link. - [LINK](https://movie-react-shrikant.netlify.app/)
 
