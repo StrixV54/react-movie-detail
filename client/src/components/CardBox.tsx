@@ -1,5 +1,11 @@
 // import React from "react";
-import { CardActions, CardContent, CardMedia, Typography } from "@mui/material";
+import {
+  CardActions,
+  CardContent,
+  CardMedia,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import Card from "@mui/material/Card";
 import { Link } from "react-router-dom";
 
@@ -12,6 +18,8 @@ interface propsType {
 }
 
 function CardBox(props: propsType) {
+  const theme = useTheme();
+  const isDarkMode: boolean = theme.palette.mode === "dark" ? true : false;
   const { movie, description, id, imdb_url } = props;
 
   return (
@@ -47,6 +55,9 @@ function CardBox(props: propsType) {
           //   data: props,
           // }}
           className="link-to-movie"
+          style={{
+            color: isDarkMode ? "#59b8de" : "#13679f",
+          }}
         >
           Details
         </Link>

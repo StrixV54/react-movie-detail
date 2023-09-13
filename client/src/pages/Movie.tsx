@@ -7,6 +7,7 @@ import {
   IconButton,
   Tooltip,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { useRef, useState } from "react";
 import { useLoaderData, useParams } from "react-router-dom";
@@ -26,17 +27,21 @@ interface propsType {
   category: string;
 }
 
-
 function Movie() {
   // const { state: { data } } = useLocation();
   // const { movie, description, rating, imdb_url, category } = data;
   const { id } = useParams();
   const movieDetails: [] = useLoaderData() as [];
-  const currentMovieDetail : propsType = movieDetails.filter((item : {id : number}) => String(item.id) == id)[0];
+  const currentMovieDetail: propsType = movieDetails.filter(
+    (item: { id: number }) => String(item.id) == id
+  )[0];
   const { movie, description, rating, imdb_url, category } = currentMovieDetail;
   const textAreaValueRef = useRef<HTMLTextAreaElement | null>(null);
   const [isEditModeActive, setIsEditModeActive] = useState<boolean>(false);
   const [prevValue, setPrevValue] = useState<string>(description);
+
+  const theme = useTheme();
+  const isDarkMode: boolean = theme.palette.mode === "dark" ? true : false;
 
   const makeFirstLetterCapital = (input: string) => {
     return input.charAt(0).toUpperCase() + input.slice(1);
@@ -134,10 +139,7 @@ function Movie() {
                   }}
                   onClick={() => setIsEditModeActive((prev) => !prev)}
                 >
-                  <EditIcon
-                    color="primary"
-                    sx={{ height: "15px", width: "15px" }}
-                  />
+                  <EditIcon sx={{ height: "15px", width: "15px" }} />
                 </IconButton>
               </Tooltip>
             </Typography>
@@ -152,6 +154,7 @@ function Movie() {
                 fontSize: "1.2rem",
                 marginTop: "12px",
                 textDecoration: "none",
+                color: isDarkMode ? "#afafaf" : "#525252",
                 border: isEditModeActive ? "solid 1px #636363" : "none",
                 background: "none",
               }}

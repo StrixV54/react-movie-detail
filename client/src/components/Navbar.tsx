@@ -4,11 +4,14 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useState, MouseEvent } from "react";
+import { useState, MouseEvent, useContext } from "react";
 import { AccountCircle } from "@mui/icons-material";
 import MovieIcon from "@mui/icons-material/Movie";
-import { Container, Menu, MenuItem } from "@mui/material";
+import { Container, Menu, MenuItem, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
+import { ColorModeContext } from "../context/ThemeModeProvider";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
 
 const pages = [
   { id: "1", name: "List of Movies", path: "/my-app" },
@@ -16,6 +19,9 @@ const pages = [
 ];
 
 export default function Navbar() {
+  const theme = useTheme();
+  const isDarkMode: boolean = theme.palette.mode === "dark" ? true : false;
+  const context = useContext(ColorModeContext);
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -36,7 +42,11 @@ export default function Navbar() {
   };
 
   return (
-    <AppBar position="static" sx={{ paddingY: "4px" }} color="primary">
+    <AppBar
+      position="static"
+      sx={{ paddingY: "4px", backgroundColor: isDarkMode ? "#285395" : "" }}
+      color="primary"
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <MovieIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
@@ -92,6 +102,7 @@ export default function Navbar() {
                   to={page.path}
                   key={page.id}
                   className="link-to-route-menulist"
+                  style={{ color: "inherit" }}
                 >
                   <MenuItem onClick={handleCloseNavMenu}>{page.name}</MenuItem>
                 </Link>
@@ -125,13 +136,30 @@ export default function Navbar() {
             }}
           >
             {pages.map((page) => (
-              <Link to={page.path} key={page.id} className="link-to-route">
+              <Link
+                to={page.path}
+                key={page.id}
+                className="link-to-route"
+                style={{ color: "inherit" }}
+              >
                 <MenuItem onClick={handleCloseNavMenu}>{page.name}</MenuItem>
               </Link>
             ))}
           </Box>
 
           <Box sx={{ flexGrow: 0, display: "flex", alignItems: "center" }}>
+            <Box
+              sx={{ display: { sm: "flex", xs: "none", alignItems: "center" } }}
+            >
+              {isDarkMode ? "Dark" : "Light"}
+              <IconButton
+                sx={{ mr: 1 }}
+                onClick={context.toggleColorMode}
+                color="inherit"
+              >
+                {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+              </IconButton>
+            </Box>
             <Typography pt="3px" sx={{ display: { sm: "block", xs: "none" } }}>
               Shrikant
             </Typography>
@@ -167,6 +195,12 @@ export default function Navbar() {
                 </Typography>
               </MenuItem>
               <MenuItem onClick={handleClose}>My account</MenuItem>
+              <MenuItem
+                onClick={context.toggleColorMode}
+                sx={{ display: { sm: "none", xs: "block" } }}
+              >
+                {isDarkMode ? "Set LightMode" : "Set DarkMode"}
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

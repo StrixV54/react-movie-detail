@@ -1,27 +1,29 @@
-# React + TypeScript + Vite
+# REACT - MOVIE
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This Project is created to showcase use of both frontend and Backend focusing on tech stack like React, NodeJS, Typescript and Material-UI. It provides Top 10 IMDB Movies list and categories of movies. 
 
-Currently, two official plugins are available:
+To check the Live version of project, follow this link. - [LINK](https://movie-react-shrikant.netlify.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Getting started
+To Configure and Run Project on your Local, follow mentioned steps.
 
-## Expanding the ESLint configuration
+- Clone the Project in your local.
+- Navigate to the Project directory.
+- Open two terminal, one for frontend and one for backend.
+- For Frontend, run command `cd client`.
+- For Backend, run command `cd server`.
+- Install dependencies for both server and client using command `npm install` in both terminals separately.
+- Start both server and client using `npm run dev` in both terminals separately.
+- Open the app in your web browser (usually at http://localhost:5178).
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+# Contribution
+Feel free to report Issue or send Pull Request.
 
-- Configure the top-level `parserOptions` property like this:
+To contribute into the Project:
+- Fork and Clone the repo.
+- Create a separate branch with proper name and do the changes.
+- Check project is working correctly in local.
+- Raise a PR against forks.
+- We will take care from here if there aren't any changes required. 
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+If you have any questions or feedback, please don't hesitate to contact me at shrikantvk54@gmail.com, or reach out to Me directly. Hope you find this resource helpful.
