@@ -1,6 +1,6 @@
 # REACT - MOVIE
 
-This Project provides Top 10 IMDB Movies list and categories of movies. It is created using Tech stacks :- React, NodeJs, Typescript, Material-UI, etc.
+This Project provides Top 10 IMDB Movies list and categories of movies. It is created using following highlighting Tech stacks :- React, NodeJs, Typescript, Material-UI.
 
 To check the Live version of project, follow this link. - [LINK](https://movie-react-shrikant.netlify.app/)
 
