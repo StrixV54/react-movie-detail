@@ -1,4 +1,4 @@
-import { ThemeProvider } from "@emotion/react";
+import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline, PaletteMode, createTheme } from "@mui/material";
 import { ReactNode, createContext, useEffect, useMemo, useState } from "react";
 

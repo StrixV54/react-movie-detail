@@ -4,6 +4,7 @@ import {
   CardContent,
   CardMedia,
   Typography,
+  useTheme,
 } from "@mui/material";
 import Card from "@mui/material/Card";
 import { Link } from "react-router-dom";
@@ -17,6 +18,7 @@ interface propsType {
 }
 
 function CardBox(props: propsType) {
+  const theme = useTheme();
   const { movie, description, id, imdb_url } = props;
 
   return (
@@ -46,20 +48,18 @@ function CardBox(props: propsType) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Typography color="text.link">
-          <Link
-            to={"/movie/" + id + "?name=" + movie}
-            // state={{
-            //   data: props,
-            // }}
-            className="link-to-movie"
-            style={{
-              color: "inherit",
-            }}
-          >
-            Details
-          </Link>
-        </Typography>
+        <Link
+          to={"/movie/" + id + "?name=" + movie}
+          // state={{
+          //   data: props,
+          // }}
+          className="link-to-movie"
+          style={{
+            color: theme.palette.text.link,
+          }}
+        >
+          Details
+        </Link>
       </CardActions>
     </Card>
   );

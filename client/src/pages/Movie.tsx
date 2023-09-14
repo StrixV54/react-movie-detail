@@ -7,6 +7,7 @@ import {
   IconButton,
   Tooltip,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { useRef, useState } from "react";
 import { useLoaderData, useParams } from "react-router-dom";
@@ -38,6 +39,7 @@ function Movie() {
   const textAreaValueRef = useRef<HTMLTextAreaElement | null>(null);
   const [isEditModeActive, setIsEditModeActive] = useState<boolean>(false);
   const [prevValue, setPrevValue] = useState<string>(description);
+  const theme = useTheme();
 
   const makeFirstLetterCapital = (input: string) => {
     return input.charAt(0).toUpperCase() + input.slice(1);
@@ -139,28 +141,27 @@ function Movie() {
                 </IconButton>
               </Tooltip>
             </Typography>
-            <Typography color="text.textarea" width="100%">
-              <TextareaAutosize
-                defaultValue={description}
-                // maxRows={5}
-                minRows={3}
-                ref={textAreaValueRef}
-                style={{
-                  fontFamily: "sans-serif",
-                  resize: "none",
-                  fontSize: "1.2rem",
-                  marginTop: "12px",
-                  textDecoration: "none",
-                  width: "100%",
-                  color: "inherit",
-                  // color: isDarkMode ? "#afafaf" : "#525252",
-                  border: isEditModeActive ? "solid 1px #636363" : "none",
-                  background: "none",
-                }}
-                disabled={!isEditModeActive}
-                // sx={{ wordWrap: "break-word", height: "300px" }}
-              ></TextareaAutosize>
-            </Typography>
+            {/* <Typography color="text.textarea" width="100%"> */}
+            <TextareaAutosize
+              defaultValue={description}
+              // maxRows={5}
+              minRows={3}
+              ref={textAreaValueRef}
+              style={{
+                fontFamily: "sans-serif",
+                resize: "none",
+                fontSize: "1.2rem",
+                marginTop: "12px",
+                textDecoration: "none",
+                width: "100%",
+                color: theme.palette.text.textarea,
+                border: isEditModeActive ? "solid 1px #636363" : "none",
+                background: "none",
+              }}
+              disabled={!isEditModeActive}
+              // sx={{ wordWrap: "break-word", height: "300px" }}
+            ></TextareaAutosize>
+            {/* </Typography> */}
             {isEditModeActive ? (
               <LoadingButton
                 color="primary"
