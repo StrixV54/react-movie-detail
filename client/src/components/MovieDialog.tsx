@@ -87,7 +87,7 @@ const MovieDialog = ({
       fullWidth={true}
       maxWidth="lg"
       closeAfterTransition
-      onBlur={() => setIsEditModeActive(false)}
+      // onBlur={() => setIsEditModeActive(false)}
     >
       <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
         {id + " : " + movie}
