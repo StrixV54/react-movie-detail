@@ -3,7 +3,7 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
-import Layout from "./pages/Layout";
+import Layout from "./pages/Layout.tsx";
 import { lazy, Suspense } from "react";
 import Loading from "./pages/Loading.tsx";
 import { getMoviesList } from "./api/api.tsx";
