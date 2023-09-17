@@ -11,6 +11,7 @@ import ErrorPage from "./pages/ErrorPage.tsx";
 
 const MyAppPage = lazy(() => import("./pages/MovieList.tsx"));
 const GenrePage = lazy(() => import("./pages/Genres.tsx"));
+const MoviePage = lazy(() => import("./pages/Movie.tsx"));
 
 const getMovies = async () => {
   const result = await getMoviesList();
@@ -36,14 +37,11 @@ const router = createBrowserRouter([
         loader: getMovies,
         element: <GenrePage />,
       },
-<<<<<<< HEAD
-=======
       {
         path: "/movie/:id",
         loader: getMovies,
         element: <MoviePage />,
       },
->>>>>>> parent of 116d141 (added React Query and frontend changes)
     ],
   },
 ]);
