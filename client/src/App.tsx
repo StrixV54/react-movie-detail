@@ -10,7 +10,6 @@ import ErrorPage from "./pages/ErrorPage.tsx";
 
 const MyAppPage = lazy(() => import("./pages/MovieList.tsx"));
 const GenrePage = lazy(() => import("./pages/Genres.tsx"));
-const MoviePage = lazy(() => import("./pages/Movie.tsx"));
 
 const router = createBrowserRouter([
   {
@@ -28,10 +27,6 @@ const router = createBrowserRouter([
       {
         path: "/genres",
         element: <GenrePage />,
-      },
-      {
-        path: "/movie/:id",
-        element: <MoviePage />,
       },
     ],
   },
