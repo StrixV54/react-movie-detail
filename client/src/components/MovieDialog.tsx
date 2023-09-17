@@ -87,7 +87,7 @@ const MovieDialog = ({
       fullWidth={true}
       maxWidth="lg"
       closeAfterTransition
-      onBlur={() => setIsEditModeActive(false)}
+      // onBlur={() => setIsEditModeActive(false)}
     >
       <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
         {id + " : " + movie}
@@ -213,7 +213,7 @@ const MovieDialog = ({
             color: theme.palette.text.link,
             paddingX: "1rem",
             "&:hover": {
-              backgroundColor: theme.palette.text.linkBg,
+              backgroundColor: "#4b4b4b",
             },
           }}
         >
