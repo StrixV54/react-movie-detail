@@ -1,25 +1,39 @@
 // import React from "react";
 import {
+  Button,
   CardActions,
   CardContent,
   CardMedia,
   Typography,
-  useTheme,
+  styled,
 } from "@mui/material";
 import Card from "@mui/material/Card";
-import { Link } from "react-router-dom";
+import MovieDialog from "./MovieDialog";
+import { useState } from "react";
+import { MovieDetailType } from "../utils/types";
 
-interface propsType {
-  movie: string;
-  description: string;
-  id: string;
-  imdb_url: string;
-  rating: string;
-}
+const DetailButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.text.link,
+  backgroundColor: theme.palette.text.linkBg,
+  border: "none",
+  "&:hover": {
+    backgroundColor: theme.palette.text.linkHoverBg,
+    border: "none",
+  },
+}));
 
-function CardBox(props: propsType) {
-  const theme = useTheme();
+function CardBox(props: MovieDetailType) {
+  // const theme = useTheme();
   const { movie, description, id, imdb_url } = props;
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <Card
@@ -48,18 +62,10 @@ function CardBox(props: propsType) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Link
-          to={"/movie/" + id + "?name=" + movie}
-          // state={{
-          //   data: props,
-          // }}
-          className="link-to-movie"
-          style={{
-            color: theme.palette.text.link,
-          }}
-        >
+        <DetailButton onClick={handleClickOpen} variant="outlined">
           Details
-        </Link>
+        </DetailButton>
+        <MovieDialog handleClose={handleClose} open={open} {...props} />
       </CardActions>
     </Card>
   );

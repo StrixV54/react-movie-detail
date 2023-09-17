@@ -9,7 +9,7 @@ import { AccountCircle } from "@mui/icons-material";
 import MovieIcon from "@mui/icons-material/Movie";
 import { Container, Menu, MenuItem, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
-import { ColorModeContext } from "../context/ThemeModeProvider";
+import { ColorModeContext } from "../context/ThemeMode";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 

@@ -1,38 +1,62 @@
-// import React from 'react'
-
 import {
   Box,
-  Container,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   Grid,
   IconButton,
+  TextareaAutosize,
+  Theme,
   Tooltip,
   Typography,
+  styled,
   useTheme,
 } from "@mui/material";
+import { MovieDialogType } from "../utils/types";
+import CloseIcon from "@mui/icons-material/Close";
 import { useRef, useState } from "react";
-import { useLoaderData, useParams } from "react-router-dom";
-import EditIcon from "@mui/icons-material/Edit";
-import LoadingButton from "@mui/lab/LoadingButton";
-import SaveIcon from "@mui/icons-material/Save";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
 import Image from "mui-image";
-import { postDetails } from "../api/api.tsx";
-import { MovieDetailType } from "../utils/types.tsx";
-import { makeFirstLetterCapital } from "../utils/helper.tsx";
+import { LoadingButton } from "@mui/lab";
+import { makeFirstLetterCapital } from "../utils/helper";
+import SaveIcon from "@mui/icons-material/Save";
+import EditIcon from "@mui/icons-material/Edit";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { postDetails } from "../api/api";
 
-function Movie() {
-  // const { state: { data } } = useLocation();
-  // const { movie, description, rating, imdb_url, category } = data;
-  const { id } = useParams();
-  const movieDetails: [] = useLoaderData() as [];
-  const currentMovieDetail: MovieDetailType = movieDetails.filter(
-    (item: { id: number }) => String(item.id) == id
-  )[0];
-  const { movie, description, rating, imdb_url, category } = currentMovieDetail;
-  const textAreaValueRef = useRef<HTMLTextAreaElement | null>(null);
-  const [isEditModeActive, setIsEditModeActive] = useState<boolean>(false);
-  const [prevValue, setPrevValue] = useState<string>(description);
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  "& .MuiDialogContent-root": {
+    padding: theme.spacing(2),
+  },
+  "& .MuiDialogActions-root": {
+    padding: theme.spacing(1),
+  },
+}));
+
+const MovieDialog = ({
+  handleClose,
+  open,
+  description,
+  id,
+  movie,
+  imdb_url,
+  rating,
+  category,
+}: MovieDialogType) => {
   const theme = useTheme();
+  const textAreaValueRef = useRef<HTMLTextAreaElement | null>(null);
+  const [prevValue, setPrevValue] = useState<string>(description);
+  const [isEditModeActive, setIsEditModeActive] = useState<boolean>(false);
+
+  const queryClient = useQueryClient();
+
+  const saveDetailMutation = useMutation({
+    mutationFn: postDetails,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["movies"]);
+    },
+  });
 
   const handleSave = async () => {
     const newValue: string = textAreaValueRef.current!.value;
@@ -41,26 +65,46 @@ function Movie() {
         alert("You are trying to save same value.");
         return;
       }
-      const postDescription = async () => {
-        await postDetails(id as string, newValue);
-      };
-      postDescription();
+      saveDetailMutation.mutate({
+        id: id,
+        description: newValue,
+      });
+      // const postDescription = async () => {
+      //   await postDetails(id as string, newValue);
+      // };
+      // postDescription();
     } catch (error) {
       console.log("Something went wrong", error);
     }
     setIsEditModeActive(false);
     setPrevValue(newValue);
+    handleClose();
   };
 
   return (
-      <Container maxWidth="xl">
-        <Typography
-          variant="h5"
-          sx={{ my: { md: 4, xs: 3 }, fontWeight: 800 }}
-          align="center"
-        >
-          {id} : {movie}
-        </Typography>
+    <BootstrapDialog
+      onClose={handleClose}
+      aria-labelledby="customized-dialog-title"
+      open={open}
+      fullWidth={true}
+      maxWidth="lg"
+    >
+      <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
+        {id + " : " + movie}
+      </DialogTitle>
+      <IconButton
+        aria-label="close"
+        onClick={handleClose}
+        sx={{
+          position: "absolute",
+          right: 8,
+          top: 8,
+          color: (theme: Theme) => theme.palette.grey[500],
+        }}
+      >
+        <CloseIcon />
+      </IconButton>
+      <DialogContent dividers>
         <Grid
           container
           spacing={2}
@@ -71,7 +115,7 @@ function Movie() {
           <Grid
             item
             alignItems="center"
-            md={3}
+            md={4}
             sm={4}
             xs={12}
             display="flex"
@@ -87,8 +131,8 @@ function Movie() {
           <Grid
             item
             alignItems="center"
-            md={7}
-            sm={12}
+            md={8}
+            sm={8}
             xs={12}
             p={0}
             paddingX={{ md: 3, xs: 0 }}
@@ -104,10 +148,10 @@ function Movie() {
                 padding: 0,
               }}
             >
-              <Typography variant="h6" pb={{ md: 3, xs: 1 }}>
+              <Typography variant="h6" mb={{ md: 2, xs: 1 }}>
                 <strong>Rating</strong> : {rating}
               </Typography>
-              <Typography variant="h6" pb={{ md: 3, xs: 1 }}>
+              <Typography variant="h6" mb={{ md: 2, xs: 1 }}>
                 <strong>Category</strong> : {makeFirstLetterCapital(category)}
               </Typography>
               <Typography
@@ -115,6 +159,7 @@ function Movie() {
                 pb={0}
                 alignItems="center"
                 justifyContent="center"
+                mb={{ md: 1, xs: 1 }}
               >
                 <strong>Description</strong>
                 <Tooltip title="Edit">
@@ -140,41 +185,39 @@ function Movie() {
                   fontFamily: "sans-serif",
                   resize: "none",
                   fontSize: "1.2rem",
-                  marginTop: "12px",
+                  padding: isEditModeActive ? 8 : 0,
                   textDecoration: "none",
                   width: "100%",
                   color: theme.palette.text.textarea,
-                  border: isEditModeActive ? "solid 1px #636363" : "none",
+                  border: isEditModeActive ? "solid 1px #a2a2a2" : "none",
                   background: "none",
                 }}
                 disabled={!isEditModeActive}
                 // sx={{ wordWrap: "break-word", height: "300px" }}
               ></TextareaAutosize>
-              {/* </Typography> */}
-              {isEditModeActive ? (
-                <LoadingButton
-                  color="primary"
-                  onClick={handleSave}
-                  // loading={loading}
-                  // loadingPosition="start"
-                  startIcon={<SaveIcon />}
-                  variant="contained"
-                  sx={{
-                    fontSize: "11px",
-                    width: "fit-content",
-                    marginTop: "30px",
-                  }}
-                >
-                  <span>Save</span>
-                </LoadingButton>
-              ) : (
-                ""
-              )}
             </Box>
           </Grid>
         </Grid>
-      </Container>
+      </DialogContent>
+      <DialogActions>
+        <Button
+          autoFocus
+          onClick={handleSave}
+          disabled={!isEditModeActive}
+          variant="text"
+          sx={{
+            color: theme.palette.text.link,
+            paddingX: "1rem",
+            "&:hover": {
+              backgroundColor: "#4b4b4b",
+            },
+          }}
+        >
+          Save changes
+        </Button>
+      </DialogActions>
+    </BootstrapDialog>
   );
-}
+};
 
-export default Movie;
+export default MovieDialog;
