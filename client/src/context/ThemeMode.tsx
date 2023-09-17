@@ -6,7 +6,6 @@ declare module "@mui/material/styles" {
   interface TypeBackground {
     appbar?: string;
   }
-
   interface TypeText {
     heading?: string;
     link?: string;
