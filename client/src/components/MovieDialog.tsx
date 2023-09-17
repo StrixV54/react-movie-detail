@@ -86,6 +86,8 @@ const MovieDialog = ({
       open={open}
       fullWidth={true}
       maxWidth="lg"
+      closeAfterTransition
+      onBlur={() => setIsEditModeActive(false)}
     >
       <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
         {id + " : " + movie}
@@ -123,7 +125,11 @@ const MovieDialog = ({
               src={imdb_url}
               className="movie-image-detail"
               duration={300}
-              style={{ borderRadius: "10px" }}
+              style={{
+                borderRadius: "10px",
+                userSelect: "none",
+                pointerEvents: "none",
+              }}
             />
           </Grid>
           <Grid

@@ -52,6 +52,7 @@ function CardBox(props: MovieDetailType) {
         title="green iguana"
         component="img"
         loading="lazy"
+        draggable={false}
       />
       <CardContent sx={{ flexGrow: 1 }}>
         <Typography gutterBottom variant="h6" component="div">
