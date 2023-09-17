@@ -1,18 +1,20 @@
 import { Box, Container, Typography } from "@mui/material";
+import { useLoaderData } from "react-router-dom";
 import CategoryBox from "../components/CategoryBox.tsx";
-import { useQuery } from "@tanstack/react-query";
-import { getMoviesList } from "../api/api.tsx";
-import Loading from "./Loading.tsx";
 
 const categories = ["action", "crime", "drama"];
 
 function Genres() {
-  const response = useQuery({
-    queryKey: ["movies"],
-    queryFn: () => getMoviesList(),
-  });
+  const movieDetails: [] = useLoaderData() as [];
+  // const [movieDetails, setMovieDetails] = useState([]);
 
-  if (response.isLoading) return <Loading />;
+  // useEffect(() => {
+  //   const getMovies = async () => {
+  //     const result = await getMoviesList();
+  //     setMovieDetails(result);
+  //   };
+  //   getMovies();
+  // }, []);
 
   return (
     <Container maxWidth="xl">
@@ -22,11 +24,7 @@ function Genres() {
       <Box sx={{ height: "100%", width: "100%" }}>
         {categories.map((genre, id) => {
           return (
-            <CategoryBox
-              key={id}
-              genre={genre}
-              movieDetails={response.data}
-            />
+            <CategoryBox key={id} genre={genre} movieDetails={movieDetails} />
           );
         })}
       </Box>

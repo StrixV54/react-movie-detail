@@ -1,19 +1,28 @@
 // import React from 'react'
 
 import { Box, Container, Grid, Typography } from "@mui/material";
+import { useLoaderData } from "react-router-dom";
 import CardBox from "../components/CardBox";
-import { useQuery } from "@tanstack/react-query";
-import { getMoviesList } from "../api/api";
-import { MovieDetailType } from "../utils/types";
-import Loading from "./Loading";
+
+interface propsType {
+  movie: string;
+  description: string;
+  id: string;
+  imdb_url: string;
+  rating: string;
+}
 
 function MovieList() {
-  const response = useQuery({
-    queryKey: ["movies"],
-    queryFn: () => getMoviesList(),
-  });
+  const movieDetails: [] = useLoaderData() as [];
+  // const [movieDetails, setMovieDetails] = useState(user);
 
-  if (response.isLoading) return <Loading />;
+  // useEffect(() => {
+  //   const getMovies = async () => {
+  //     const result = await getMoviesList();
+  //     setMovieDetails(result);
+  //   };
+  //   getMovies();
+  // }, []);
 
   return (
     <Container maxWidth="xl">
@@ -35,22 +44,23 @@ function MovieList() {
             justifyContent: { md: "normal", sm: "center" },
           }}
         >
-          {response.data?.map((item: MovieDetailType, index: number) => {
-            return (
-              <Grid
-                md={3}
-                sm={6}
-                xs={12}
-                item
-                key={index}
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <CardBox {...item} />
-              </Grid>
-            );
-          })}
+          {movieDetails &&
+            movieDetails.map((data: propsType, id) => {
+              return (
+                <Grid
+                  md={3}
+                  sm={6}
+                  xs={12}
+                  item
+                  key={id}
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                >
+                  <CardBox {...data} />
+                </Grid>
+              );
+            })}
         </Grid>
       </Box>
     </Container>

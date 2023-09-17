@@ -10,8 +10,6 @@ declare module "@mui/material/styles" {
   interface TypeText {
     heading?: string;
     link?: string;
-    linkBg?: string;
-    linkHoverBg?: string;
     textarea?: string;
   }
 }
@@ -31,8 +29,6 @@ const getDesignTokens = (mode: PaletteMode) => ({
           text: {
             heading: "#13679f",
             link: "#13679f",
-            linkBg: "#efefef",
-            linkHoverBg: "#cfcfcf",
             textarea: "#525252",
           },
         }
@@ -48,8 +44,6 @@ const getDesignTokens = (mode: PaletteMode) => ({
           text: {
             heading: "#59b8de",
             link: "#59b8de",
-            linkBg: "#3a3a3a",
-            linkHoverBg: "#303030",
             textarea: "#c7c7c7",
           },
         }),

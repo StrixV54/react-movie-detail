@@ -1,8 +1,21 @@
 import { Grid, Typography } from "@mui/material";
 import CardBox from "./CardBox";
-import { CategoryType, MovieDetailType } from "../utils/types";
 
-function CategoryBox({ genre, movieDetails }: CategoryType ) {
+interface propsTypeCategory {
+  id?: number;
+  genre: string;
+  movieDetails: [];
+}
+
+interface propsTypeCard {
+  movie: string;
+  description: string;
+  id: string;
+  imdb_url: string;
+  rating: string;
+}
+
+function CategoryBox({ genre, movieDetails }: propsTypeCategory) {
   return (
     <Grid
       container
@@ -27,9 +40,9 @@ function CategoryBox({ genre, movieDetails }: CategoryType ) {
           {genre.toUpperCase()}
         </Typography>
       </Grid>
-      {movieDetails!
-        .filter(item => item.category === genre)
-        .map((data: MovieDetailType, id) => {
+      {movieDetails
+        .filter((item: { category: string }) => item.category === genre)
+        .map((data: propsTypeCard, id) => {
           return (
             <Grid md={3} sm={6} item key={id}>
               <CardBox {...data} />
