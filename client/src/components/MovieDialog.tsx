@@ -213,7 +213,7 @@ const MovieDialog = ({
             color: theme.palette.text.link,
             paddingX: "1rem",
             "&:hover": {
-              backgroundColor: "#4b4b4b",
+              backgroundColor: theme.palette.text.linkBg,
             },
           }}
         >
