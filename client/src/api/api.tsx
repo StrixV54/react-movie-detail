@@ -1,10 +1,14 @@
 import { baseUrl } from "../utils/constants";
 import { MovieDetailType } from "../utils/types";
+import ErrorDisplay from "../pages/ErrorDisplay";
 
 export const getMoviesList = async (): Promise<MovieDetailType[]> => {
-  return fetch(baseUrl + "api/getmovies")
+  return fetch(baseUrl + "/api/getmovies")
     .then((res) => res.json())
-    .then((res) => res.movies);
+    .then((res) => res.movies)
+    .catch(() => {
+      throw new Error("Failed to Fetch GetMovies API");
+    });
 };
 
 export const postDetails = async ({
@@ -14,7 +18,7 @@ export const postDetails = async ({
   id: number;
   description: string;
 }): Promise<Response> => {
-  return await fetch(baseUrl + "api/updatedetails", {
+  return await fetch(baseUrl + "/api/updatedetails", {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

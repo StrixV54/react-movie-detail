@@ -15,6 +15,7 @@ function ErrorPage() {
         justifyContent: "center",
         alignItems: "center",
         color: "#000000",
+        backgroundColor: "#ffffff",
       }}
     >
       <Typography variant="h1" color="error">

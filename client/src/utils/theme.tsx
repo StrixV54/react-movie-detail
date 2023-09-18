@@ -53,7 +53,7 @@ export const getTheme = (mode: PaletteTheme) => {
         },
         text: {
           heading: "#b559f2",
-          link: "#9d40da",
+          link: "#c273f6",
           linkBg: "#432f43",
           linkHoverBg: "#303030",
           textarea: "#c7c7c7",

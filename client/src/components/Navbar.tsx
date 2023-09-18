@@ -7,30 +7,20 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useState, MouseEvent, useContext } from "react";
 import { AccountCircle } from "@mui/icons-material";
 import MovieIcon from "@mui/icons-material/Movie";
-import {
-  Container,
-  Menu,
-  MenuItem,
-  Button,
-  Stack,
-} from "@mui/material";
+import { Container, Menu, MenuItem, Button, Stack, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import { ColorModeContext } from "../context/ThemeMode";
 import { PaletteTheme } from "../utils/types";
-import { paletteColor } from "../utils/constants";
-import { makeFirstLetterCapital } from "../utils/helper";
-
-const pages = [
-  { id: "1", name: "List of Movies", path: "/my-app" },
-  { id: "2", name: "Genre", path: "/genres" },
-];
-
-const paletteThemes = Object.keys(paletteColor);
+import { listOfPages, paletteColor } from "../utils/constants";
+import { LightenColor, makeFirstLetterCapital } from "../utils/helper";
 
 export default function Navbar() {
   const context = useContext(ColorModeContext);
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [anchorElTheme, setAnchorElTheme] = useState<null | HTMLElement>(null);
+  const paletteThemes = Object.keys(paletteColor);
+  const pages = listOfPages;
 
   const handleMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -48,14 +38,16 @@ export default function Navbar() {
     setAnchorElNav(null);
   };
 
-  const [anchorElTheme, setAnchorElTheme] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorElTheme);
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     setAnchorElTheme(event.currentTarget);
+    console.log(event.currentTarget);
   };
+
   const handleCloseTheme = () => {
     setAnchorElTheme(null);
   };
+
   const handleChooseTheme = (mode: string) => {
     context.toggleColorMode(mode as PaletteTheme);
     handleCloseTheme();
@@ -168,20 +160,11 @@ export default function Navbar() {
           </Box>
 
           <Box sx={{ flexGrow: 0, display: "flex", alignItems: "center" }}>
-            {/* <Box
-              sx={{ display: { sm: "flex", xs: "none", alignItems: "center" } }}
-            >
-              {isDarkMode ? "Dark" : "Light"}
-              <IconButton
-                sx={{ mr: 1 }}
-                onClick={() => context.toggleColorMode("dark")}
-                color="inherit"
-              >
-                {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
-              </IconButton>
-            </Box> */}
             <Box
-              sx={{ display: { sm: "flex", xs: "none", alignItems: "center" } }}
+              sx={{
+                display: { sm: "flex", xs: "none" },
+                alignItems: "center",
+              }}
             >
               <Button
                 id="basic-button"
@@ -207,33 +190,45 @@ export default function Navbar() {
                   transform: "translate(-30px, 5px)",
                 }}
               >
-                <Stack
-                  // spacing={{ xs: 1, sm: 2 }}
-                  direction={{ xs: "column", sm: "row" }}
-                  useFlexGap
-                  flexWrap="wrap"
-                  p={0}
-                  m={0}
+                <Grid
+                  container
+                  px={1}
+                  width={350}
+                  gap={0}
+                  sx={{
+                    display: { sm: "flex", xs: "none" },
+                  }}
                 >
-                  {paletteThemes.map((item) => {
+                  {paletteThemes.map((item, index) => {
                     const color = item as keyof typeof paletteColor;
 
                     return (
-                      <MenuItem
+                      <Grid
+                        item
+                        flex={1}
+                        md={6}
+                        height={50}
+                        key={index}
                         onClick={() => handleChooseTheme(item)}
                         sx={{
                           backgroundColor: paletteColor[color],
                           color: color !== "light" ? "white" : "black",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
                           "&:hover": {
-                            backgroundColor: "#474747 !important",
+                            backgroundColor: LightenColor(
+                              paletteColor[color] as string,
+                              10
+                            ),
                           },
                         }}
                       >
                         {makeFirstLetterCapital(color)}
-                      </MenuItem>
+                      </Grid>
                     );
                   })}
-                </Stack>
+                </Grid>
               </Menu>
             </Box>
             <Typography p="3px" sx={{ display: { sm: "block", xs: "none" } }}>
@@ -288,33 +283,52 @@ export default function Navbar() {
                   padding: 0,
                   paddingTop: 0,
                   paddingBottom: 0,
-                  transform: "translate(-30px, 5px)",
+                  transform: "translate(0px, 12px)",
+                  display: { sm: "none", xs: "flex" },
+                  alignItems: "center",
                 }}
               >
-                <Stack
-                  // spacing={{ xs: 1, sm: 2 }}
-                  direction={{ xs: "column", sm: "row" }}
-                  useFlexGap
-                  flexWrap="wrap"
-                  p={0}
-                  m={0}
+                <Grid
+                  container
+                  px={1}
+                  width={200}
+                  direction="column"
+                  gap={0}
+                  sx={{
+                    display: { sm: "none", xs: "flex" },
+                  }}
                 >
-                  {paletteThemes.map((item) => {
+                  {paletteThemes.map((item, index) => {
                     const color = item as keyof typeof paletteColor;
 
                     return (
-                      <MenuItem
+                      <Grid
+                        item
+                        flex={1}
+                        xs={12}
+                        py={2}
+                        height={300}
+                        key={index}
                         onClick={() => handleChooseTheme(item)}
                         sx={{
                           backgroundColor: paletteColor[color],
                           color: color !== "light" ? "white" : "black",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          "&:hover": {
+                            backgroundColor: LightenColor(
+                              paletteColor[color] as string,
+                              10
+                            ),
+                          },
                         }}
                       >
                         {makeFirstLetterCapital(color)}
-                      </MenuItem>
+                      </Grid>
                     );
                   })}
-                </Stack>
+                </Grid>
               </Menu>
             </Menu>
           </Box>

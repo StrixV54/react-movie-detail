@@ -4,8 +4,9 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import CardBox from "../components/CardBox";
 import { useQuery } from "@tanstack/react-query";
 import { getMoviesList } from "../api/api";
-import { MovieDetailType } from "../utils/types";
+import { ApiError, MovieDetailType } from "../utils/types";
 import Loading from "./Loading";
+import ErrorDisplay from "./ErrorDisplay";
 
 function MovieList() {
   const response = useQuery({
@@ -13,7 +14,12 @@ function MovieList() {
     queryFn: () => getMoviesList(),
   });
 
+  console.log(response);
   if (response.isLoading) return <Loading />;
+  if (response.isError) {
+    const errorMessage: ApiError = response?.error as ApiError;
+    return <ErrorDisplay error={errorMessage.message} />;
+  }
 
   return (
     <Container maxWidth="xl">

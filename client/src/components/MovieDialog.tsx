@@ -167,7 +167,7 @@ const MovieDialog = ({
                 mb={{ md: 1, xs: 1 }}
               >
                 <strong>Description</strong>
-                <Tooltip title="Edit">
+                {/* <Tooltip title="Edit">
                   <IconButton
                     sx={{
                       border: "solid 1px #d0d0d0",
@@ -178,7 +178,7 @@ const MovieDialog = ({
                   >
                     <EditIcon sx={{ height: "15px", width: "15px" }} />
                   </IconButton>
-                </Tooltip>
+                </Tooltip> */}
               </Typography>
               {/* <Typography color="text.textarea" width="100%"> */}
               <TextareaAutosize
@@ -207,14 +207,31 @@ const MovieDialog = ({
       <DialogActions>
         <Button
           autoFocus
+          onClick={() => setIsEditModeActive((prev) => !prev)}
+          // disabled={isEditModeActive}
+          variant="text"
+          sx={{
+            color: theme.palette.text.link,
+            paddingX: "1rem",
+            fontWeight: "bold",
+            "&:hover": {
+              backgroundColor: "#2d2d2d",
+            },
+          }}
+        >
+          Edit Description
+        </Button>
+        <Button
+          autoFocus
           onClick={handleSave}
           disabled={!isEditModeActive}
           variant="text"
           sx={{
             color: theme.palette.text.link,
             paddingX: "1rem",
+            fontWeight: "bold",
             "&:hover": {
-              backgroundColor: "#4b4b4b",
+              backgroundColor: "#343434",
             },
           }}
         >
