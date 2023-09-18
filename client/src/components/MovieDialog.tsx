@@ -81,13 +81,14 @@ const MovieDialog = ({
 
   return (
     <BootstrapDialog
-      onClose={handleClose}
+      onClose={() => {
+        setIsEditModeActive(false);
+        handleClose();
+      }}
       aria-labelledby="customized-dialog-title"
       open={open}
       fullWidth={true}
       maxWidth="lg"
-      closeAfterTransition
-      // onBlur={() => setIsEditModeActive(false)}
     >
       <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
         {id + " : " + movie}
