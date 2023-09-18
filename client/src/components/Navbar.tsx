@@ -11,7 +11,6 @@ import {
   Container,
   Menu,
   MenuItem,
-  useTheme,
   Button,
   Stack,
 } from "@mui/material";
@@ -20,8 +19,6 @@ import { ColorModeContext } from "../context/ThemeMode";
 import { PaletteTheme } from "../utils/types";
 import { paletteColor } from "../utils/constants";
 import { makeFirstLetterCapital } from "../utils/helper";
-// import Brightness4Icon from "@mui/icons-material/Brightness4";
-// import Brightness7Icon from "@mui/icons-material/Brightness7";
 
 const pages = [
   { id: "1", name: "List of Movies", path: "/my-app" },
@@ -31,8 +28,6 @@ const pages = [
 const paletteThemes = Object.keys(paletteColor);
 
 export default function Navbar() {
-  const theme = useTheme();
-  const isDarkMode: boolean = theme.palette.mode === "dark" ? true : false;
   const context = useContext(ColorModeContext);
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
