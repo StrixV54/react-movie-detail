@@ -31,7 +31,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   >
     <ThemeModeProvider>
       <App />
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </ThemeModeProvider>
   </PersistQueryClientProvider>
 );
