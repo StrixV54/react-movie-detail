@@ -45,7 +45,7 @@ const ThemeModeProvider = ({ children }: { children: ReactNode }) => {
       },
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [mode]
+    []
   );
 
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);

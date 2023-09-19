@@ -65,10 +65,6 @@ const MovieDialog = ({
         id: id,
         description: newValue,
       });
-      // const postDescription = async () => {
-      //   await postDetails(id as string, newValue);
-      // };
-      // postDescription();
     } catch (error) {
       console.log("Something went wrong", error);
     }
@@ -169,8 +165,9 @@ const MovieDialog = ({
                 alignItems="center"
                 justifyContent="center"
                 mb={{ md: 1, xs: 1 }}
+                fontWeight="bold"
               >
-                <strong>Description</strong>
+                Description
               </Typography>
               <TextareaAutosize
                 defaultValue={description}
