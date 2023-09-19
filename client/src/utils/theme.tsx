@@ -3,6 +3,12 @@ import { PaletteTheme } from "./types";
 import Values from "values.js";
 import { paletteColor } from "./constants";
 
+/**
+ *
+ * @param color Color to assign shades and create theme from it.
+ * @param mode Material Ui theme mode (dark/light) related to the color provided.
+ * @returns A theme object for Material UI palette
+ */
 const createThemeUsingColor = (color: string, mode: PaletteMode = "light") => {
   const colorValue = new Values(color, "base");
   return {

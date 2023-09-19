@@ -1,5 +1,10 @@
 import { Container, Typography } from "@mui/material";
 
+/**
+ * A Component to display Error Message
+ * @param param0 error message to be displayed
+ * @returns
+ */
 function ErrorDisplay({ error }: { error: string }) {
   return (
     <Container

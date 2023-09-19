@@ -22,10 +22,14 @@ const getDesignTokens = (mode: PaletteTheme) => ({
   palette: getPalatteTheme(mode),
 });
 
+/*
+ *  Fetches theme mode from localstorage if not available then set to light mode.
+ */
 const localStoreCache = localStorage.getItem("react-movie-darkmodecache");
 const modeInit: PaletteTheme = localStoreCache
   ? (localStoreCache as PaletteTheme)
   : "light";
+
 export const ColorModeContext = createContext({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   toggleColorMode: (_mode: PaletteTheme) => {},
@@ -44,7 +48,6 @@ const ThemeModeProvider = ({ children }: { children: ReactNode }) => {
         setMode(mode);
       },
     }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 

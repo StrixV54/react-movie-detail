@@ -26,7 +26,7 @@ export type MovieDialogType = MovieDialogPropsType & MovieDetailType;
 
 export type PaletteTheme = "light" | "dark" | "purple" | "teal";
 
-export type ApiError = {
+export interface ApiError {
   message: string;
   stack?: string;
 };
