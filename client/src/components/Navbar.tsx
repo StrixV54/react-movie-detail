@@ -7,12 +7,18 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useState, MouseEvent, useContext } from "react";
 import { AccountCircle } from "@mui/icons-material";
 import MovieIcon from "@mui/icons-material/Movie";
-import { Container, Menu, MenuItem, Button, Grid } from "@mui/material";
+import {
+  Container,
+  Menu,
+  MenuItem,
+  Button,
+  Grid,
+  lighten,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import { ColorModeContext } from "../context/ThemeMode";
 import { PaletteTheme } from "../utils/types";
 import { listOfPagesWithRoute, paletteColor } from "../utils/constants";
-import { LightenColor, makeFirstLetterCapital } from "../utils/helper";
 
 export default function Navbar() {
   const context = useContext(ColorModeContext);
@@ -215,15 +221,17 @@ export default function Navbar() {
                           display: "flex",
                           justifyContent: "center",
                           alignItems: "center",
+                          textTransform: "capitalize",
+                          cursor: "pointer",
                           "&:hover": {
-                            backgroundColor: LightenColor(
-                              paletteColor[color].displayColor as string,
-                              10
+                            backgroundColor: lighten(
+                              paletteColor[color].displayColor,
+                              0.2
                             ),
                           },
                         }}
                       >
-                        {makeFirstLetterCapital(color)}
+                        {color}
                       </Grid>
                     );
                   })}
@@ -314,15 +322,17 @@ export default function Navbar() {
                           display: "flex",
                           justifyContent: "center",
                           alignItems: "center",
+                          textTransform: "capitalize",
+                          cursor: "pointer",
                           "&:hover": {
-                            backgroundColor: LightenColor(
+                            backgroundColor: lighten(
                               paletteColor[color].displayColor as string,
-                              10
+                              0.2
                             ),
                           },
                         }}
                       >
-                        {makeFirstLetterCapital(color)}
+                        {color}
                       </Grid>
                     );
                   })}

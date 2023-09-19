@@ -27,15 +27,14 @@ const createThemeUsingColor = (color: string, mode: PaletteMode = "light") => {
 };
 
 export const getPalatteTheme = (mode: PaletteTheme) => {
+  console.log(paletteColor.dark.toString());
   switch (mode) {
     case "light":
-      return createThemeUsingColor(paletteColor.light.themeColor);
-    case "dark":
-      return createThemeUsingColor(paletteColor.dark.themeColor, "dark");
-    case "purple":
-      return createThemeUsingColor(paletteColor.purple.themeColor, "dark");
     case "teal":
-      return createThemeUsingColor(paletteColor.teal.themeColor);
+      return createThemeUsingColor(paletteColor[mode].themeColor);
+    case "dark":
+    case "purple":
+      return createThemeUsingColor(paletteColor[mode].themeColor, "dark");
     default:
       return createThemeUsingColor("#606060");
   }

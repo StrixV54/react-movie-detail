@@ -17,7 +17,6 @@ import { MovieDialogType } from "../utils/types";
 import CloseIcon from "@mui/icons-material/Close";
 import { useRef, useState } from "react";
 import Image from "mui-image";
-import { makeFirstLetterCapital } from "../utils/helper";
 // import EditIcon from "@mui/icons-material/Edit";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { postDetails } from "../api/api";
@@ -155,8 +154,14 @@ const MovieDialog = ({
               <Typography variant="h6" mb={{ md: 2, xs: 1 }}>
                 <strong>Rating</strong> : {rating}
               </Typography>
-              <Typography variant="h6" mb={{ md: 2, xs: 1 }}>
-                <strong>Category</strong> : {makeFirstLetterCapital(category)}
+              <Typography
+                variant="h6"
+                mb={{ md: 2, xs: 1 }}
+                sx={{
+                  textTransform: "capitalize",
+                }}
+              >
+                <strong>Category</strong> : {category}
               </Typography>
               <Typography
                 variant="h6"
