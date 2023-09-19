@@ -166,20 +166,7 @@ const MovieDialog = ({
                 mb={{ md: 1, xs: 1 }}
               >
                 <strong>Description</strong>
-                {/* <Tooltip title="Edit">
-                  <IconButton
-                    sx={{
-                      border: "solid 1px #d0d0d0",
-                      padding: "2px",
-                      margin: "0px 8px",
-                    }}
-                    onClick={() => setIsEditModeActive((prev) => !prev)}
-                  >
-                    <EditIcon sx={{ height: "15px", width: "15px" }} />
-                  </IconButton>
-                </Tooltip> */}
               </Typography>
-              {/* <Typography color="text.textarea" width="100%"> */}
               <TextareaAutosize
                 defaultValue={description}
                 // maxRows={5}
