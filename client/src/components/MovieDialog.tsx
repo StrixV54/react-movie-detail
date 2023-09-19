@@ -184,7 +184,6 @@ const MovieDialog = ({
                   background: "none",
                 }}
                 disabled={!isEditModeActive}
-                // sx={{ wordWrap: "break-word", height: "300px" }}
               ></TextareaAutosize>
             </Box>
           </Grid>
