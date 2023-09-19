@@ -27,7 +27,6 @@ const createThemeUsingColor = (color: string, mode: PaletteMode = "light") => {
 };
 
 export const getPalatteTheme = (mode: PaletteTheme) => {
-  console.log(paletteColor.dark.toString());
   switch (mode) {
     case "light":
     case "teal":
