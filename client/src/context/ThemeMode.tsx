@@ -28,7 +28,7 @@ const modeInit: PaletteTheme = localStoreCache
   : "light";
 export const ColorModeContext = createContext({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  toggleColorMode: (mode: PaletteTheme) => {},
+  toggleColorMode: (_mode: PaletteTheme) => {},
 });
 
 const ThemeModeProvider = ({ children }: { children: ReactNode }) => {
@@ -44,6 +44,7 @@ const ThemeModeProvider = ({ children }: { children: ReactNode }) => {
         setMode(mode);
       },
     }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [mode]
   );
 
