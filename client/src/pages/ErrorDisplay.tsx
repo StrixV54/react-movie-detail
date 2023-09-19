@@ -1,7 +1,6 @@
 import { Container, Typography } from "@mui/material";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function ErrorDisplay({ error }: { error: any }) {
+function ErrorDisplay({ error }: { error: string }) {
   return (
     <Container
       maxWidth="xl"

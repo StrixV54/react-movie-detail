@@ -7,11 +7,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useState, MouseEvent, useContext } from "react";
 import { AccountCircle } from "@mui/icons-material";
 import MovieIcon from "@mui/icons-material/Movie";
-import { Container, Menu, MenuItem, Button, Stack, Grid } from "@mui/material";
+import { Container, Menu, MenuItem, Button, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import { ColorModeContext } from "../context/ThemeMode";
 import { PaletteTheme } from "../utils/types";
-import { listOfPages, paletteColor } from "../utils/constants";
+import { listOfPagesWithRoute, paletteColor } from "../utils/constants";
 import { LightenColor, makeFirstLetterCapital } from "../utils/helper";
 
 export default function Navbar() {
@@ -20,7 +20,7 @@ export default function Navbar() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [anchorElTheme, setAnchorElTheme] = useState<null | HTMLElement>(null);
   const paletteThemes = Object.keys(paletteColor);
-  const pages = listOfPages;
+  const pages = listOfPagesWithRoute;
 
   const handleMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -41,7 +41,6 @@ export default function Navbar() {
   const open = Boolean(anchorElTheme);
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     setAnchorElTheme(event.currentTarget);
-    console.log(event.currentTarget);
   };
 
   const handleCloseTheme = () => {
@@ -211,14 +210,14 @@ export default function Navbar() {
                         key={index}
                         onClick={() => handleChooseTheme(item)}
                         sx={{
-                          backgroundColor: paletteColor[color],
+                          backgroundColor: paletteColor[color].displayColor,
                           color: color !== "light" ? "white" : "black",
                           display: "flex",
                           justifyContent: "center",
                           alignItems: "center",
                           "&:hover": {
                             backgroundColor: LightenColor(
-                              paletteColor[color] as string,
+                              paletteColor[color].displayColor as string,
                               10
                             ),
                           },
@@ -307,18 +306,17 @@ export default function Navbar() {
                         flex={1}
                         xs={12}
                         py={2}
-                        height={300}
                         key={index}
                         onClick={() => handleChooseTheme(item)}
                         sx={{
-                          backgroundColor: paletteColor[color],
+                          backgroundColor: paletteColor[color].displayColor,
                           color: color !== "light" ? "white" : "black",
                           display: "flex",
                           justifyContent: "center",
                           alignItems: "center",
                           "&:hover": {
                             backgroundColor: LightenColor(
-                              paletteColor[color] as string,
+                              paletteColor[color].displayColor as string,
                               10
                             ),
                           },

@@ -63,7 +63,11 @@ function CardBox(props: MovieDetailType) {
         </Typography>
       </CardContent>
       <CardActions>
-        <DetailButton onClick={handleClickOpen} variant="outlined">
+        <DetailButton
+          onClick={handleClickOpen}
+          variant="outlined"
+          sx={{ fontWeight: "bold" }}
+        >
           Details
         </DetailButton>
         <MovieDialog handleClose={handleClose} open={open} {...props} />

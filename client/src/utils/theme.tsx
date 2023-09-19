@@ -1,82 +1,42 @@
 import { PaletteMode } from "@mui/material";
 import { PaletteTheme } from "./types";
+import Values from "values.js";
+import { paletteColor } from "./constants";
 
-export const getTheme = (mode: PaletteTheme) => {
+const createThemeUsingColor = (color: string, mode: PaletteMode = "light") => {
+  const colorValue = new Values(color, "base");
+  return {
+    mode: mode,
+    primary: {
+      main: color,
+    },
+    background: {
+      appbar: colorValue.shade(60).hexString(),
+      default: mode === "light" ? "#d1d1d1" : "#232323",
+      paper: mode === "light" ? "#ececec" : colorValue.shade(70).hexString(),
+    },
+    text: {
+      heading: colorValue.tint(20).hexString(),
+      link: colorValue.tint(30).hexString(),
+      linkBg: mode === "light" ? "#ececec" : colorValue.shade(70).hexString(),
+      linkHoverBg:
+        mode === "light" ? "#cecece" : colorValue.shade(80).hexString(),
+      textarea: mode === "light" ? "#424242" : "#bbbbbb",
+    },
+  };
+};
+
+export const getPalatteTheme = (mode: PaletteTheme) => {
   switch (mode) {
     case "light":
-      return {
-        mode: "light" as PaletteMode,
-        primary: {
-          main: "#020202",
-        },
-        background: {
-          appbar: "#285395",
-          default: "#ececec",
-        },
-        text: {
-          heading: "#13679f",
-          link: "#13679f",
-          linkBg: "#efefef",
-          linkHoverBg: "#cfcfcf",
-          textarea: "#525252",
-        },
-      };
+      return createThemeUsingColor(paletteColor.light.themeColor);
     case "dark":
-      return {
-        mode: "dark" as PaletteMode,
-        primary: {
-          main: "#285395",
-        },
-        background: {
-          appbar: "#285395",
-          default: "#2c2c2c",
-          paper: "#3d3d3d",
-        },
-        text: {
-          heading: "#59b8de",
-          link: "#59b8de",
-          linkBg: "#3a3a3a",
-          linkHoverBg: "#303030",
-          textarea: "#c7c7c7",
-        },
-      };
+      return createThemeUsingColor(paletteColor.dark.themeColor, "dark");
     case "purple":
-      return {
-        mode: "dark" as PaletteMode,
-        primary: {
-          main: "#8434b9",
-        },
-        background: {
-          appbar: "#541f78",
-          default: "#2c2c2c",
-          paper: "#39293f",
-        },
-        text: {
-          heading: "#b559f2",
-          link: "#c273f6",
-          linkBg: "#432f43",
-          linkHoverBg: "#303030",
-          textarea: "#c7c7c7",
-        },
-      };
+      return createThemeUsingColor(paletteColor.purple.themeColor, "dark");
     case "teal":
-      return {
-        mode: "light" as PaletteMode,
-        primary: {
-          main: "#020202",
-        },
-        background: {
-          appbar: "#115b57",
-          default: "#dddddd",
-          paper: "#bbbbbb",
-        },
-        text: {
-          heading: "#12797c",
-          link: "#12797c",
-          linkBg: "#cfcfcf",
-          linkHoverBg: "#cfcfcf",
-          textarea: "#525252",
-        },
-      };
+      return createThemeUsingColor(paletteColor.teal.themeColor);
+    default:
+      return createThemeUsingColor("#606060");
   }
 };

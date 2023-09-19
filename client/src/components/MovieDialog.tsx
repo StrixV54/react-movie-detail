@@ -9,7 +9,6 @@ import {
   IconButton,
   TextareaAutosize,
   Theme,
-  Tooltip,
   Typography,
   styled,
   useTheme,
@@ -19,7 +18,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useRef, useState } from "react";
 import Image from "mui-image";
 import { makeFirstLetterCapital } from "../utils/helper";
-import EditIcon from "@mui/icons-material/Edit";
+// import EditIcon from "@mui/icons-material/Edit";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { postDetails } from "../api/api";
 
@@ -215,7 +214,7 @@ const MovieDialog = ({
             paddingX: "1rem",
             fontWeight: "bold",
             "&:hover": {
-              backgroundColor: "#2d2d2d",
+              backgroundColor: theme.palette.text.linkHoverBg,
             },
           }}
         >
@@ -231,7 +230,7 @@ const MovieDialog = ({
             paddingX: "1rem",
             fontWeight: "bold",
             "&:hover": {
-              backgroundColor: "#343434",
+              backgroundColor: theme.palette.text.linkHoverBg,
             },
           }}
         >

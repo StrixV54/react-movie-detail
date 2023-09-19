@@ -1,6 +1,5 @@
 import { baseUrl } from "../utils/constants";
 import { MovieDetailType } from "../utils/types";
-import ErrorDisplay from "../pages/ErrorDisplay";
 
 export const getMoviesList = async (): Promise<MovieDetailType[]> => {
   return fetch(baseUrl + "/api/getmovies")

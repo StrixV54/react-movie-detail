@@ -1,7 +1,7 @@
 import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline, createTheme } from "@mui/material";
 import { ReactNode, createContext, useEffect, useMemo, useState } from "react";
-import { getTheme } from "../utils/theme";
+import { getPalatteTheme } from "../utils/theme";
 import { PaletteTheme } from "../utils/types";
 
 declare module "@mui/material/styles" {
@@ -19,11 +19,13 @@ declare module "@mui/material/styles" {
 }
 
 const getDesignTokens = (mode: PaletteTheme) => ({
-  palette: getTheme(mode),
+  palette: getPalatteTheme(mode),
 });
 
 const localStoreCache = localStorage.getItem("react-movie-darkmodecache");
-const modeInit: PaletteTheme = localStoreCache ? localStoreCache as PaletteTheme : "light";
+const modeInit: PaletteTheme = localStoreCache
+  ? (localStoreCache as PaletteTheme)
+  : "light";
 export const ColorModeContext = createContext({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   toggleColorMode: (mode: PaletteTheme) => {},

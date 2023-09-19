@@ -20,3 +20,4 @@ export function LightenColor(color: string, percent: number) {
       .slice(1)
   );
 }
+

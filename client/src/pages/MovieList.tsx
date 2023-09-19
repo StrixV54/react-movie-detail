@@ -14,7 +14,6 @@ function MovieList() {
     queryFn: () => getMoviesList(),
   });
 
-  console.log(response);
   if (response.isLoading) return <Loading />;
   if (response.isError) {
     const errorMessage: ApiError = response?.error as ApiError;
