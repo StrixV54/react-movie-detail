@@ -36,16 +36,16 @@ function MovieList() {
           pb={6}
           sx={{
             paddingX: { xl: 8, md: 4, xs: 2 },
-            alignItems: { md: "normal", sm: "center" },
-            justifyContent: { md: "normal", sm: "center" },
+            justifyContent: { md: "start", sm: "center" },
           }}
         >
           {response.data?.map((item: MovieDetailType, index: number) => {
             return (
               <Grid
-                md={3}
+                md={4}
                 sm={6}
                 xs={12}
+                lg={3}
                 item
                 key={index}
                 display="flex"

@@ -5,10 +5,10 @@ import { getMoviesList } from "../api/api.tsx";
 import Loading from "./Loading.tsx";
 import { ApiError } from "../utils/types.tsx";
 import ErrorDisplay from "./ErrorDisplay.tsx";
-import { categoriesOfMovies } from "../utils/constants.tsx";
+import { CATEGORY_MOVIES } from "../utils/constants.tsx";
 
 function Genres() {
-  const categories = categoriesOfMovies;
+  const categories = CATEGORY_MOVIES;
   const response = useQuery({
     queryKey: ["movies"],
     queryFn: () => getMoviesList(),

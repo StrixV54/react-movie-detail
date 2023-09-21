@@ -1,7 +1,7 @@
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
+import Typography, { TypographyProps } from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState, MouseEvent, useContext } from "react";
@@ -14,39 +14,94 @@ import {
   Button,
   Grid,
   lighten,
+  GridProps,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { ColorModeContext } from "../context/ThemeMode";
 import { PaletteTheme } from "../utils/types";
-import { listOfPagesWithRoute, paletteColor } from "../utils/constants";
+import {
+  COLOR_CONSTANTS,
+  LIST_OF_PAGES_AND_ROUTES,
+  PALETTE_COLOR,
+} from "../utils/constants";
+
+const LogoTypography = (props: TypographyProps) => (
+  <Typography
+    variant={props.variant ?? "h6"}
+    noWrap
+    component="a"
+    href="/"
+    sx={{
+      mr: props.mr ?? 0,
+      display: props.display,
+      flexGrow: props.flexGrow ?? 0,
+      fontFamily: "sans-serif",
+      fontWeight: 700,
+      letterSpacing: "0.2rem",
+      color: "inherit",
+      textDecoration: "none",
+    }}
+  >
+    {props.children}
+  </Typography>
+);
+
+const ThemeGrid = (props: GridProps) => (
+  <Grid
+    item
+    paddingTop={0}
+    md={props.md ?? 12}
+    height={50}
+    py={props.py ?? 0}
+    key={props.key}
+    onClick={props.onClick}
+    sx={{
+      backgroundColor: props.bgcolor ?? COLOR_CONSTANTS.GRAY,
+      color: props.color !== "light" ? "white" : "black",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      textTransform: "capitalize",
+      cursor: "pointer",
+      "&:hover": {
+        backgroundColor: lighten(
+          (props.bgcolor as string) ?? COLOR_CONSTANTS.GRAY,
+          0.2
+        ),
+      },
+    }}
+  >
+    {props.children}
+  </Grid>
+);
 
 export default function Navbar() {
   const context = useContext(ColorModeContext);
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [anchorElTheme, setAnchorElTheme] = useState<null | HTMLElement>(null);
-  const paletteThemes = Object.keys(paletteColor);
-  const pages = listOfPagesWithRoute;
+  const paletteThemes = Object.keys(PALETTE_COLOR);
+  const pages = LIST_OF_PAGES_AND_ROUTES;
+  const open = Boolean(anchorElTheme);
 
   const handleMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
   };
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const open = Boolean(anchorElTheme);
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     setAnchorElTheme(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
   };
 
   const handleCloseTheme = () => {
@@ -67,23 +122,9 @@ export default function Navbar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <MovieIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "sans-serif",
-              fontWeight: 700,
-              letterSpacing: "0.2rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
+          <LogoTypography display={{ xs: "none", md: "flex" }} mr={2}>
             MOVIES
-          </Typography>
+          </LogoTypography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -127,24 +168,13 @@ export default function Navbar() {
             </Menu>
           </Box>
           <MovieIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
+          <LogoTypography
+            display={{ xs: "flex", md: "none" }}
             variant="h5"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "sans-serif",
-              fontWeight: 700,
-              letterSpacing: "0.2rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
+            flexGrow={1}
           >
             MOVIES
-          </Typography>
+          </LogoTypography>
           <Box
             sx={{
               flexGrow: 1,
@@ -188,51 +218,34 @@ export default function Navbar() {
                 open={open}
                 onClose={handleCloseTheme}
                 sx={{
-                  margin: 0,
-                  padding: 0,
-                  paddingTop: 0,
-                  paddingBottom: 0,
                   transform: "translate(-30px, 5px)",
+                  display: { sm: "flex", xs: "none" },
+                  "& > .MuiPopover-paper > ul": {
+                    margin: 0,
+                    padding: 0,
+                  },
                 }}
               >
                 <Grid
                   container
-                  px={1}
+                  p={1}
                   width={350}
                   gap={0}
-                  sx={{
-                    display: { sm: "flex", xs: "none" },
-                  }}
+                  bgcolor={COLOR_CONSTANTS.GRAY}
                 >
                   {paletteThemes.map((item, index) => {
-                    const color = item as keyof typeof paletteColor;
+                    const color = item as keyof typeof PALETTE_COLOR;
 
                     return (
-                      <Grid
-                        item
-                        flex={1}
+                      <ThemeGrid
                         md={6}
-                        height={50}
-                        key={index}
                         onClick={() => handleChooseTheme(item)}
-                        sx={{
-                          backgroundColor: paletteColor[color].displayColor,
-                          color: color !== "light" ? "white" : "black",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          textTransform: "capitalize",
-                          cursor: "pointer",
-                          "&:hover": {
-                            backgroundColor: lighten(
-                              paletteColor[color].displayColor,
-                              0.2
-                            ),
-                          },
-                        }}
+                        key={index}
+                        color={color}
+                        bgcolor={PALETTE_COLOR[color].displayColor}
                       >
                         {color}
-                      </Grid>
+                      </ThemeGrid>
                     );
                   })}
                 </Grid>
@@ -274,7 +287,10 @@ export default function Navbar() {
               </MenuItem>
               <MenuItem onClick={handleClose}>My account</MenuItem>
               <MenuItem
-                sx={{ display: { sm: "none", xs: "block" } }}
+                sx={{
+                  display: { sm: "none", xs: "flex" },
+                  alignItems: "center",
+                }}
                 onClick={handleClick}
               >
                 Theme
@@ -288,52 +304,36 @@ export default function Navbar() {
                 sx={{
                   margin: 0,
                   padding: 0,
-                  paddingTop: 0,
-                  paddingBottom: 0,
                   transform: "translate(0px, 12px)",
                   display: { sm: "none", xs: "flex" },
                   alignItems: "center",
+                  "& > .MuiPopover-paper > ul": {
+                    margin: 0,
+                    padding: 0,
+                  },
                 }}
               >
                 <Grid
                   container
-                  px={1}
+                  p={1}
                   width={200}
                   direction="column"
                   gap={0}
-                  sx={{
-                    display: { sm: "none", xs: "flex" },
-                  }}
+                  bgcolor={COLOR_CONSTANTS.GRAY}
                 >
                   {paletteThemes.map((item, index) => {
-                    const color = item as keyof typeof paletteColor;
+                    const color = item as keyof typeof PALETTE_COLOR;
 
                     return (
-                      <Grid
-                        item
-                        flex={1}
-                        xs={12}
-                        py={2}
+                      <ThemeGrid
                         key={index}
+                        color={color}
+                        py={2}
+                        bgcolor={PALETTE_COLOR[color].displayColor}
                         onClick={() => handleChooseTheme(item)}
-                        sx={{
-                          backgroundColor: paletteColor[color].displayColor,
-                          color: color !== "light" ? "white" : "black",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          textTransform: "capitalize",
-                          cursor: "pointer",
-                          "&:hover": {
-                            backgroundColor: lighten(
-                              paletteColor[color].displayColor as string,
-                              0.2
-                            ),
-                          },
-                        }}
                       >
                         {color}
-                      </Grid>
+                      </ThemeGrid>
                     );
                   })}
                 </Grid>

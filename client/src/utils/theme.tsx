@@ -1,16 +1,26 @@
 import { PaletteMode } from "@mui/material";
 import { PaletteTheme } from "./types";
 import Values from "values.js";
-import { paletteColor } from "./constants";
+import { COLOR_CONSTANTS, PALETTE_COLOR } from "./constants";
+
+// const DEFAULT_THEME_COLOR = {
+//   LIGHT_BG: "#ececec",
+//   HOVER_BG: "#cecece",
+//   DEFAULT_LIGHT_BG: "#d1d1d1",
+//   DEFAULT_DARK_BG: "#181818",
+//   TEXTAREA_LIGHT: "#3d3d3d",
+//   TEXTAREA_DARK: "#bbbbbb",
+// };
 
 /**
  *
- * @param color Color to assign shades and create theme from it.
+ * @param color Color to assign shades from and create theme from it.
  * @param mode Material Ui theme mode (dark/light) related to the color provided.
  * @returns A theme object for Material UI palette
  */
 const createThemeUsingColor = (color: string, mode: PaletteMode = "light") => {
   const colorValue = new Values(color, "base");
+  const grayShade = new Values(COLOR_CONSTANTS.GRAY_WHITE_BALANCE, "base");
   return {
     mode: mode,
     primary: {
@@ -18,16 +28,16 @@ const createThemeUsingColor = (color: string, mode: PaletteMode = "light") => {
     },
     background: {
       appbar: colorValue.shade(60).hexString(),
-      default: mode === "light" ? "#d1d1d1" : "#232323",
-      paper: mode === "light" ? "#ececec" : colorValue.shade(70).hexString(),
+      default: mode === "light" ? grayShade.tint(50).hexString() : grayShade.shade(85).hexString(),
+      paper: mode === "light" ? grayShade.tint(90).hexString() : colorValue.shade(70).hexString(),
     },
     text: {
       heading: colorValue.tint(20).hexString(),
       link: colorValue.tint(30).hexString(),
-      linkBg: mode === "light" ? "#ececec" : colorValue.shade(70).hexString(),
+      linkBg: mode === "light" ? grayShade.tint(50).hexString() : colorValue.shade(70).hexString(),
       linkHoverBg:
-        mode === "light" ? "#cecece" : colorValue.shade(80).hexString(),
-      textarea: mode === "light" ? "#424242" : "#bbbbbb",
+        mode === "light" ? grayShade.tint(20).hexString() : colorValue.shade(80).hexString(),
+      textarea: mode === "light" ? grayShade.shade(60).hexString() : grayShade.tint(30).hexString(),
     },
   };
 };
@@ -36,11 +46,11 @@ export const getPalatteTheme = (mode: PaletteTheme) => {
   switch (mode) {
     case "light":
     case "teal":
-      return createThemeUsingColor(paletteColor[mode].themeColor);
+      return createThemeUsingColor(PALETTE_COLOR[mode].themeColor);
     case "dark":
     case "purple":
-      return createThemeUsingColor(paletteColor[mode].themeColor, "dark");
+      return createThemeUsingColor(PALETTE_COLOR[mode].themeColor, "dark");
     default:
-      return createThemeUsingColor("#606060");
+      return createThemeUsingColor(COLOR_CONSTANTS.GRAY);
   }
 };

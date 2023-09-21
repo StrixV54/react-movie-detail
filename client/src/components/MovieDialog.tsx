@@ -20,6 +20,7 @@ import Image from "mui-image";
 // import EditIcon from "@mui/icons-material/Edit";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { postDetails } from "../api/api";
+import { COLOR_CONSTANTS } from "../utils/constants";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -182,7 +183,9 @@ const MovieDialog = ({
                   textDecoration: "none",
                   width: "100%",
                   color: theme.palette.text.textarea,
-                  border: isEditModeActive ? "solid 1px #a2a2a2" : "none",
+                  border: isEditModeActive
+                    ? `solid 1px ${COLOR_CONSTANTS.LIGHT_GRAY}`
+                    : "none",
                   background: "none",
                 }}
                 disabled={!isEditModeActive}

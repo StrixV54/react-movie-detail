@@ -14,8 +14,8 @@ function ErrorPage() {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        color: "#000000",
-        backgroundColor: "#ffffff",
+        color: "black",
+        backgroundColor: "white",
       }}
     >
       <Typography variant="h1" color="error">

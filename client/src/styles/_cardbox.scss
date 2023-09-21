@@ -3,3 +3,23 @@
   padding: 8px;
   outline: none;
 }
+
+#card-title-text {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  white-space: pre-wrap;
+}
+
+#card-description-text {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 7;
+  white-space: pre-wrap;
+
+  @media screen and (max-width: 1200px) {
+    -webkit-line-clamp: 5;
+  }
+}
