@@ -41,6 +41,7 @@ function CardBox(props: MovieDetailType) {
         maxWidth: 385,
         minHeight: 440,
         height: "100%",
+        width: "100%",
         display: "flex",
         flexDirection: "column",
       }}
@@ -55,17 +56,32 @@ function CardBox(props: MovieDetailType) {
         draggable={false}
       />
       <CardContent sx={{ flexGrow: 1 }}>
-        <Typography gutterBottom variant="h6" component="div">
+        <Typography
+          gutterBottom
+          variant="h6"
+          component="div"
+          id="card-title-text"
+        >
           {movie}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography
+          id="card-description-text"
+          variant="body2"
+          color="text.secondary"
+        >
           {description}
         </Typography>
       </CardContent>
       <CardActions>
-        <DetailButton onClick={handleClickOpen} variant="outlined">
+        <DetailButton
+          onClick={handleClickOpen}
+          variant="outlined"
+          sx={{ fontWeight: "bold" }}
+        >
           Details
         </DetailButton>
+
+        {/* popup window which displays more details for the specific movie */}
         <MovieDialog handleClose={handleClose} open={open} {...props} />
       </CardActions>
     </Card>

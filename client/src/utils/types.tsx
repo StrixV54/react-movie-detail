@@ -9,17 +9,24 @@ export interface MovieDetailType {
 
 export type ApiResponse = {
   movies: MovieDetailType[];
-};
+}
 
 export type CategoryType = {
   id?: number;
   genre: string;
   movieDetails: MovieDetailType[] | undefined;
-};
+}
 
 type MovieDialogPropsType = {
   handleClose: () => void;
   open: boolean;
-};
+}
 
 export type MovieDialogType = MovieDialogPropsType & MovieDetailType;
+
+export type PaletteTheme = "light" | "dark" | "purple" | "teal";
+
+export interface ApiError {
+  message: string;
+  stack?: string;
+}

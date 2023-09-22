@@ -4,8 +4,9 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import CardBox from "../components/CardBox";
 import { useQuery } from "@tanstack/react-query";
 import { getMoviesList } from "../api/api";
-import { MovieDetailType } from "../utils/types";
+import { ApiError, MovieDetailType } from "../utils/types";
 import Loading from "./Loading";
+import ErrorDisplay from "./ErrorDisplay";
 
 function MovieList() {
   const response = useQuery({
@@ -14,6 +15,10 @@ function MovieList() {
   });
 
   if (response.isLoading) return <Loading />;
+  if (response.isError) {
+    const errorMessage: ApiError = response?.error as ApiError;
+    return <ErrorDisplay error={errorMessage.message} />;
+  }
 
   return (
     <Container maxWidth="xl">
@@ -31,16 +36,16 @@ function MovieList() {
           pb={6}
           sx={{
             paddingX: { xl: 8, md: 4, xs: 2 },
-            alignItems: { md: "normal", sm: "center" },
-            justifyContent: { md: "normal", sm: "center" },
+            justifyContent: { md: "start", sm: "center" },
           }}
         >
           {response.data?.map((item: MovieDetailType, index: number) => {
             return (
               <Grid
-                md={3}
+                md={4}
                 sm={6}
                 xs={12}
+                lg={3}
                 item
                 key={index}
                 display="flex"

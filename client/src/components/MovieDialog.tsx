@@ -9,7 +9,6 @@ import {
   IconButton,
   TextareaAutosize,
   Theme,
-  Tooltip,
   Typography,
   styled,
   useTheme,
@@ -18,10 +17,10 @@ import { MovieDialogType } from "../utils/types";
 import CloseIcon from "@mui/icons-material/Close";
 import { useRef, useState } from "react";
 import Image from "mui-image";
-import { makeFirstLetterCapital } from "../utils/helper";
-import EditIcon from "@mui/icons-material/Edit";
+// import EditIcon from "@mui/icons-material/Edit";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { postDetails } from "../api/api";
+import { COLOR_CONSTANTS } from "../utils/constants";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -67,10 +66,6 @@ const MovieDialog = ({
         id: id,
         description: newValue,
       });
-      // const postDescription = async () => {
-      //   await postDetails(id as string, newValue);
-      // };
-      // postDescription();
     } catch (error) {
       console.log("Something went wrong", error);
     }
@@ -81,13 +76,14 @@ const MovieDialog = ({
 
   return (
     <BootstrapDialog
-      onClose={handleClose}
+      onClose={() => {
+        setIsEditModeActive(false);
+        handleClose();
+      }}
       aria-labelledby="customized-dialog-title"
       open={open}
       fullWidth={true}
       maxWidth="lg"
-      closeAfterTransition
-      // onBlur={() => setIsEditModeActive(false)}
     >
       <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
         {id + " : " + movie}
@@ -155,8 +151,14 @@ const MovieDialog = ({
               <Typography variant="h6" mb={{ md: 2, xs: 1 }}>
                 <strong>Rating</strong> : {rating}
               </Typography>
-              <Typography variant="h6" mb={{ md: 2, xs: 1 }}>
-                <strong>Category</strong> : {makeFirstLetterCapital(category)}
+              <Typography
+                variant="h6"
+                mb={{ md: 2, xs: 1 }}
+                sx={{
+                  textTransform: "capitalize",
+                }}
+              >
+                <strong>Category</strong> : {category}
               </Typography>
               <Typography
                 variant="h6"
@@ -164,22 +166,10 @@ const MovieDialog = ({
                 alignItems="center"
                 justifyContent="center"
                 mb={{ md: 1, xs: 1 }}
+                fontWeight="bold"
               >
-                <strong>Description</strong>
-                <Tooltip title="Edit">
-                  <IconButton
-                    sx={{
-                      border: "solid 1px #d0d0d0",
-                      padding: "2px",
-                      margin: "0px 8px",
-                    }}
-                    onClick={() => setIsEditModeActive((prev) => !prev)}
-                  >
-                    <EditIcon sx={{ height: "15px", width: "15px" }} />
-                  </IconButton>
-                </Tooltip>
+                Description
               </Typography>
-              {/* <Typography color="text.textarea" width="100%"> */}
               <TextareaAutosize
                 defaultValue={description}
                 // maxRows={5}
@@ -193,11 +183,12 @@ const MovieDialog = ({
                   textDecoration: "none",
                   width: "100%",
                   color: theme.palette.text.textarea,
-                  border: isEditModeActive ? "solid 1px #a2a2a2" : "none",
+                  border: isEditModeActive
+                    ? `solid 1px ${COLOR_CONSTANTS.LIGHT_GRAY}`
+                    : "none",
                   background: "none",
                 }}
                 disabled={!isEditModeActive}
-                // sx={{ wordWrap: "break-word", height: "300px" }}
               ></TextareaAutosize>
             </Box>
           </Grid>
@@ -206,14 +197,31 @@ const MovieDialog = ({
       <DialogActions>
         <Button
           autoFocus
+          onClick={() => setIsEditModeActive((prev) => !prev)}
+          // disabled={isEditModeActive}
+          variant="text"
+          sx={{
+            color: theme.palette.text.link,
+            paddingX: "1rem",
+            fontWeight: "bold",
+            "&:hover": {
+              backgroundColor: theme.palette.text.linkHoverBg,
+            },
+          }}
+        >
+          Edit Description
+        </Button>
+        <Button
+          autoFocus
           onClick={handleSave}
           disabled={!isEditModeActive}
           variant="text"
           sx={{
             color: theme.palette.text.link,
             paddingX: "1rem",
+            fontWeight: "bold",
             "&:hover": {
-              backgroundColor: "#4b4b4b",
+              backgroundColor: theme.palette.text.linkHoverBg,
             },
           }}
         >

@@ -3,7 +3,7 @@ import App from "./App.tsx";
 import "./styles/index.scss";
 import ThemeModeProvider from "./context/ThemeMode.tsx";
 import { QueryClient } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 
@@ -31,7 +31,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   >
     <ThemeModeProvider>
       <App />
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </ThemeModeProvider>
   </PersistQueryClientProvider>
 );

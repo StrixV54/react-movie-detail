@@ -3,16 +3,22 @@ import CategoryBox from "../components/CategoryBox.tsx";
 import { useQuery } from "@tanstack/react-query";
 import { getMoviesList } from "../api/api.tsx";
 import Loading from "./Loading.tsx";
-
-const categories = ["action", "crime", "drama"];
+import { ApiError } from "../utils/types.tsx";
+import ErrorDisplay from "./ErrorDisplay.tsx";
+import { CATEGORY_MOVIES } from "../utils/constants.tsx";
 
 function Genres() {
+  const categories = CATEGORY_MOVIES;
   const response = useQuery({
     queryKey: ["movies"],
     queryFn: () => getMoviesList(),
   });
 
   if (response.isLoading) return <Loading />;
+  if (response.isError) {
+    const errorMessage: ApiError = response?.error as ApiError;
+    return <ErrorDisplay error={errorMessage.message} />;
+  }
 
   return (
     <Container maxWidth="xl">
@@ -22,11 +28,7 @@ function Genres() {
       <Box sx={{ height: "100%", width: "100%" }}>
         {categories.map((genre, id) => {
           return (
-            <CategoryBox
-              key={id}
-              genre={genre}
-              movieDetails={response.data}
-            />
+            <CategoryBox key={id} genre={genre} movieDetails={response.data} />
           );
         })}
       </Box>

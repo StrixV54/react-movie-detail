@@ -28,10 +28,10 @@ function CategoryBox({ genre, movieDetails }: CategoryType ) {
         </Typography>
       </Grid>
       {movieDetails!
-        .filter(item => item.category === genre)
+        .filter((item) => item.category === genre)
         .map((data: MovieDetailType, id) => {
           return (
-            <Grid md={3} sm={6} item key={id}>
+            <Grid md={4} sm={6} lg={3} item key={id}>
               <CardBox {...data} />
             </Grid>
           );
